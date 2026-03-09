@@ -1,5 +1,8 @@
 import Header from "../components/Header";
 import Hero from "../components/Hero";
+import ImpactSection from "../components/ImpactSection";
+import HeroImpactTransition from "../components/HeroImpactTransition";
+
 import SolutionsSection from "../components/SolutionsSection";
 import StickyServicesSection from "../components/StickyServicesSection";
 import AlertSection from "../components/AlertSection";
@@ -13,6 +16,9 @@ export default function HomePage() {
     <>
       <Header />
       <Hero />
+      <ImpactSection />
+      <HeroImpactTransition />
+
       <SolutionsSection />
       <StickyServicesSection />
       <AlertSection />
