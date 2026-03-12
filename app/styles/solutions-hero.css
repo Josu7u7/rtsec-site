@@ -1,0 +1,50 @@
+.solutions-hero {
+  padding: 160px 0 110px;
+  background: #05070a;
+}
+
+.solutions-hero-content {
+  max-width: 920px;
+}
+
+.solutions-hero-kicker {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #8da4bd;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.solutions-hero-title {
+  margin: 0;
+  font-size: clamp(42px, 6vw, 82px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+.solutions-hero-text {
+  margin: 26px 0 0;
+  max-width: 720px;
+  color: #94a3b8;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .solutions-hero {
+    padding: 130px 0 84px;
+  }
+
+  .solutions-hero-title {
+    font-size: clamp(34px, 10vw, 54px);
+    line-height: 1;
+  }
+
+  .solutions-hero-text {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}

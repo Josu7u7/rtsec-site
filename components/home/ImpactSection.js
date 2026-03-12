@@ -1,4 +1,4 @@
-import ImpactReveal from "./ImpactReveal";
+import ImpactReveal from "../motion/ImpactReveal";
 
 export default function ImpactSection() {
   const values = [

@@ -1,0 +1,57 @@
+.solutions-cta-section {
+  padding: 0 0 120px;
+  background: #05070a;
+}
+
+.solutions-cta-card {
+  padding: 44px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(11, 16, 32, 0.92));
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.solutions-cta-kicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #8da4bd;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.solutions-cta-title {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.solutions-cta-text {
+  margin: 20px 0 0;
+  max-width: 740px;
+  color: #94a3b8;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.solutions-cta-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .solutions-cta-card {
+    padding: 28px 22px;
+  }
+
+  .solutions-cta-text {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
