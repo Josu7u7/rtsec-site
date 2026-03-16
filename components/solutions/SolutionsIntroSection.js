@@ -96,8 +96,8 @@ export default function SolutionsIntroSection() {
           </h2>
 
           <p className="solutions-intro-support">
-            Arquitecturas pensadas para proteger acceso, datos, continuidad y
-            evolución operativa.
+            Arquitecturas pensadas para proteger acceso, datos,
+            continuidad y evolución operativa.
           </p>
         </div>
       </div>

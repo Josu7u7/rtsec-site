@@ -1,10 +1,11 @@
+import ContactPage from "../../components/contact/ContactPage";
+
+export const metadata = {
+  title: "Contáctanos | RTSEC Perú",
+  description:
+    "Conversemos sobre arquitectura, ciberseguridad, infraestructura y continuidad operativa.",
+};
+
 export default function ContactoPage() {
-  return (
-    <main className="container-main section-space">
-      <h1>Contáctanos</h1>
-      <p style={{ color: "#94a3b8", marginTop: 16 }}>
-        Página en construcción.
-      </p>
-    </main>
-  );
+  return <ContactPage />;
 }

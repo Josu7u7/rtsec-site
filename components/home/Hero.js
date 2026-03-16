@@ -5,9 +5,13 @@ import gsap from "gsap";
 
 export default function Hero() {
   const heroRef = useRef(null);
+  const ctxRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    ctxRef.current = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.fromTo(
@@ -51,9 +55,14 @@ export default function Hero() {
           { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.8 },
           1.05
         );
-    }, heroRef);
+    }, hero);
 
-    return () => ctx.revert();
+    return () => {
+      try {
+        ctxRef.current?.revert();
+      } catch {}
+      ctxRef.current = null;
+    };
   }, []);
 
   return (

@@ -1,6 +1,11 @@
+"use client";
+
+import { useRef } from "react";
 import ImpactReveal from "../motion/ImpactReveal";
 
 export default function ImpactSection() {
+  const sectionRef = useRef(null);
+
   const values = [
     {
       number: "+10",
@@ -95,8 +100,8 @@ export default function ImpactSection() {
   ];
 
   return (
-    <section className="impact-section-clean">
-      <ImpactReveal />
+    <section ref={sectionRef} className="impact-section-clean">
+      <ImpactReveal scopeRef={sectionRef} />
 
       <div className="impact-overlap-panel">
         <div className="container-main">

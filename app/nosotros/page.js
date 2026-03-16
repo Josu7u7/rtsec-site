@@ -1,10 +1,11 @@
+import AboutPage from "../../components/about/AboutPage";
+
+export const metadata = {
+  title: "Nosotros | RTSEC Perú",
+  description:
+    "Identidad, visión y propósito de RTSEC Perú en ciberseguridad, infraestructura y conectividad empresarial.",
+};
+
 export default function NosotrosPage() {
-  return (
-    <main className="container-main section-space">
-      <h1>Nosotros</h1>
-      <p style={{ color: "#94a3b8", marginTop: 16 }}>
-        Página en construcción.
-      </p>
-    </main>
-  );
+  return <AboutPage />;
 }

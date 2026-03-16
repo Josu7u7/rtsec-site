@@ -1,14 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function ImpactReveal() {
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
+export default function ImpactReveal({ scopeRef }) {
+  const ctxRef = useRef(null);
+
+  useEffect(() => {
+    const scope = scopeRef?.current;
+    if (!scope) return;
+
+    ctxRef.current = gsap.context(() => {
       gsap.fromTo(
         ".impact-metrics-bar",
         {
@@ -23,7 +28,7 @@ export default function ImpactReveal() {
           duration: 1.1,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".impact-section-clean",
+            trigger: scope,
             start: "top 78%",
             once: true,
           },
@@ -42,7 +47,7 @@ export default function ImpactReveal() {
           duration: 0.7,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".impact-values-header",
+            trigger: scope.querySelector(".impact-values-header"),
             start: "top 82%",
             once: true,
           },
@@ -63,7 +68,7 @@ export default function ImpactReveal() {
           duration: 1,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".impact-values-header",
+            trigger: scope.querySelector(".impact-values-header"),
             start: "top 80%",
             once: true,
           },
@@ -85,16 +90,21 @@ export default function ImpactReveal() {
           stagger: 0.12,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".impact-values-grid-premium",
+            trigger: scope.querySelector(".impact-values-grid-premium"),
             start: "top 82%",
             once: true,
           },
         }
       );
-    });
+    }, scope);
 
-    return () => ctx.revert();
-  }, []);
+    return () => {
+      try {
+        ctxRef.current?.revert();
+      } catch {}
+      ctxRef.current = null;
+    };
+  }, [scopeRef]);
 
   return null;
 }
