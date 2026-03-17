@@ -1,64 +1,58 @@
-"use client";
+import HomePageClient from "../components/home/HomePageClient";
 
-import { useEffect } from "react";
-import Hero from "../components/home/Hero";
-import ImpactSection from "../components/home/ImpactSection";
-import SolutionsIntroSection from "../components/home/SolutionsIntroSection";
-import SolutionsSliderSection from "../components/home/SolutionsSliderSection";
-import ServicesPreviewSection from "../components/home/ServicesPreviewSection";
-import HomeInsightSection from "../components/home/HomeInsightSection";
-import HomeProtectionFlowSection from "../components/home/HomeProtectionFlowSection";
-import HomePartnersSection from "../components/home/HomePartnersSection";
-import HomeFinalCTASection from "../components/home/HomeFinalCTASection";
+export const metadata = {
+  title: "RTSEC Perú | Ciberseguridad, Redes y Continuidad Operativa",
+  description:
+    "RTSEC Perú diseña e implementa soluciones de ciberseguridad, redes, conectividad, datacenter y continuidad operativa para empresas en Perú.",
+  alternates: {
+    canonical: "https://www.rtsec.com.pe",
+  },
+  openGraph: {
+    title: "RTSEC Perú | Ciberseguridad, Redes y Continuidad Operativa",
+    description:
+      "Servicios y soluciones de ciberseguridad, redes, datacenter y continuidad operativa para empresas en Perú.",
+    url: "https://www.rtsec.com.pe",
+    images: [
+      {
+        url: "/images/hero-rtsec.jpg",
+        width: 1200,
+        height: 630,
+        alt: "RTSEC Perú",
+      },
+    ],
+  },
+};
 
 export default function HomePage() {
-  useEffect(() => {
-    if ("scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
-    }
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "RTSEC Perú",
+    alternateName: ["RTSEC", "RTSEC Peru"],
+    url: "https://www.rtsec.com.pe/",
+  };
 
-    window.scrollTo(0, 0);
-
-    const id = window.requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
-    });
-
-    let scrollTimer;
-
-    const handleScrollState = () => {
-      document.body.classList.add("is-scrolling");
-
-      window.clearTimeout(scrollTimer);
-      scrollTimer = window.setTimeout(() => {
-        document.body.classList.remove("is-scrolling");
-      }, 140);
-    };
-
-    window.addEventListener("scroll", handleScrollState, { passive: true });
-    window.addEventListener("wheel", handleScrollState, { passive: true });
-    window.addEventListener("touchmove", handleScrollState, { passive: true });
-
-    return () => {
-      window.cancelAnimationFrame(id);
-      window.clearTimeout(scrollTimer);
-      window.removeEventListener("scroll", handleScrollState);
-      window.removeEventListener("wheel", handleScrollState);
-      window.removeEventListener("touchmove", handleScrollState);
-      document.body.classList.remove("is-scrolling");
-    };
-  }, []);
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "RTSEC Perú",
+    url: "https://www.rtsec.com.pe",
+    logo: "https://www.rtsec.com.pe/images/rtsec-logo.svg",
+    email: "ventas@rtsec.com.pe",
+    sameAs: ["https://www.linkedin.com/company/rtsec-peru/"],
+  };
 
   return (
     <>
-      <Hero />
-      <ImpactSection />
-      <SolutionsIntroSection />
-      <SolutionsSliderSection />
-      <ServicesPreviewSection />
-      <HomeInsightSection />
-      <HomeProtectionFlowSection />
-      <HomePartnersSection />
-      <HomeFinalCTASection />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <HomePageClient />
     </>
   );
 }
