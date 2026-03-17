@@ -16,55 +16,48 @@ import "./styles/contact-page.css";
 
 import Header from "../components/layout/Header";
 
+const baseUrl = "https://www.rtsec.com.pe";
+
 export const metadata = {
-  metadataBase: new URL("https://www.rtsec.com.pe"),
+  metadataBase: new URL(baseUrl),
   title: {
     default: "RTSEC Perú | Ciberseguridad, Redes y Continuidad Operativa",
     template: "%s | RTSEC Perú",
   },
   description:
-    "RTSEC Perú diseña e implementa soluciones de ciberseguridad, redes, conectividad, datacenter y continuidad operativa para empresas.",
+    "RTSEC Perú integra ciberseguridad, infraestructura, conectividad y continuidad operativa para organizaciones que necesitan operar con criterio, resiliencia y dirección clara.",
   applicationName: "RTSEC Perú",
   keywords: [
     "RTSEC Perú",
-    "ciberseguridad en Perú",
+    "ciberseguridad Perú",
     "servicios de ciberseguridad",
     "soluciones de ciberseguridad",
     "redes empresariales",
+    "infraestructura tecnológica",
     "continuidad operativa",
     "SOC NOC",
-    "datacenter",
-    "infraestructura TI",
-    "consultoría de ciberseguridad",
+    "consultoría en ciberseguridad",
+    "conectividad empresarial",
   ],
   authors: [{ name: "RTSEC Perú" }],
   creator: "RTSEC Perú",
   publisher: "RTSEC Perú",
-  category: "technology",
   alternates: {
-    canonical: "https://www.rtsec.com.pe",
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "512x512" },
-    ],
-    shortcut: ["/favicon.ico"],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    canonical: baseUrl,
   },
   openGraph: {
     type: "website",
     locale: "es_PE",
-    url: "https://www.rtsec.com.pe",
+    url: baseUrl,
     siteName: "RTSEC Perú",
     title: "RTSEC Perú | Ciberseguridad, Redes y Continuidad Operativa",
     description:
-      "RTSEC Perú diseña e implementa soluciones de ciberseguridad, redes, conectividad, datacenter y continuidad operativa para empresas.",
+      "Arquitectura crítica, ciberseguridad, conectividad e infraestructura para organizaciones que necesitan operar con resiliencia.",
     images: [
       {
         url: "/images/hero-rtsec.jpg",
-        width: 1200,
-        height: 630,
+        width: 1600,
+        height: 900,
         alt: "RTSEC Perú",
       },
     ],
@@ -73,26 +66,68 @@ export const metadata = {
     card: "summary_large_image",
     title: "RTSEC Perú | Ciberseguridad, Redes y Continuidad Operativa",
     description:
-      "Servicios y soluciones de ciberseguridad, redes, datacenter y continuidad operativa para empresas en Perú.",
+      "Ciberseguridad, infraestructura, conectividad y continuidad operativa para empresas en Perú.",
     images: ["/images/hero-rtsec.jpg"],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: ["/favicon.ico"],
+    apple: [
+      {
+        url: "/images/apple-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
+  category: "technology",
 };
 
 export default function RootLayout({ children }) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "RTSEC Perú",
+    alternateName: "RTSEC",
+    url: baseUrl,
+    logo: `${baseUrl}/images/rtsec-logo.svg`,
+    image: `${baseUrl}/images/hero-rtsec.jpg`,
+    email: "ventas@rtsec.com.pe",
+    sameAs: ["https://www.linkedin.com/company/rtsec-peru/"],
+    description:
+      "Empresa especializada en ciberseguridad, infraestructura, conectividad y continuidad operativa.",
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "RTSEC Perú",
+    url: baseUrl,
+    publisher: {
+      "@type": "Organization",
+      name: "RTSEC Perú",
+    },
+    inLanguage: "es-PE",
+  };
+
   return (
     <html lang="es-PE">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
         <Header />
         {children}
       </body>
