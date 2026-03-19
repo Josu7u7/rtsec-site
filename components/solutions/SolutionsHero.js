@@ -6,9 +6,9 @@ export default function SolutionsHero() {
         <h1 className="solutions-hero-title">
           Capacidades diseñadas para proteger, conectar y sostener la operación.
         </h1>
-        <p className="solutions-hero-text">
-          Una arquitectura sólida no se define por una sola herramienta, sino por
-          cómo cada capacidad responde al riesgo, al rendimiento y a la continuidad del negocio.
+        <p className="solutions-hero-support">
+          Infraestructura segura, protección, continuidad y visibilidad para
+          organizaciones que necesitan operar con resiliencia y dirección técnica.
         </p>
       </div>
     </section>

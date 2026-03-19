@@ -1,16 +1,16 @@
 import SolutionsBlocks from "../../components/solutions/SolutionsBlocks";
 
 export const metadata = {
-  title: "Soluciones de Ciberseguridad Empresarial",
+  title: "Soluciones de Ciberseguridad e Infraestructura Empresarial",
   description:
-    "Soluciones empresariales de ciberseguridad, conectividad, datacenter, identidad, protección avanzada y respuesta para organizaciones en Perú.",
+    "Soluciones empresariales en conectividad segura, ciberseguridad, data center, continuidad operativa, detección y respuesta para organizaciones en Perú.",
   alternates: {
     canonical: "https://www.rtsec.com.pe/soluciones",
   },
   openGraph: {
-    title: "Soluciones de Ciberseguridad Empresarial | RTSEC Perú",
+    title: "Soluciones de Ciberseguridad e Infraestructura Empresarial | RTSEC Perú",
     description:
-      "Redes seguras, datacenter, identidades, protección avanzada y respuesta para entornos empresariales críticos.",
+      "Infraestructura segura, protección, continuidad, visibilidad, detección y respuesta para entornos empresariales críticos.",
     url: "https://www.rtsec.com.pe/soluciones",
   },
 };

@@ -79,25 +79,25 @@ export default function SolutionsIntroSection() {
 
           <h2 className="solutions-intro-title">
             <span className="solutions-intro-line">
-              No se trata solo de implementar tecnología.
+              No se trata solo de desplegar herramientas.
             </span>
             <span className="solutions-intro-line">
-              Se trata de construir capacidades que protejan,
+              Se trata de construir capacidades que conecten,
             </span>
             <span className="solutions-intro-line">
-              conecten y sostengan la operación con criterio.
+              protejan y sostengan la operación con criterio.
             </span>
             <span className="solutions-intro-line">
               Cada solución debe responder a un riesgo real,
             </span>
             <span className="solutions-intro-line">
-              a una necesidad operativa y a una visión de crecimiento.
+              a una necesidad operativa y a una visión de continuidad.
             </span>
           </h2>
 
           <p className="solutions-intro-support">
-            Arquitecturas pensadas para proteger acceso, datos,
-            continuidad y evolución operativa.
+            Infraestructura segura, protección, continuidad y visibilidad para
+            entornos empresariales críticos.
           </p>
         </div>
       </div>

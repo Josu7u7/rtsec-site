@@ -1,12 +1,22 @@
 import Link from "next/link";
 
 const items = [
-  { id: "red-acceso-seguro", label: "Red & Acceso Seguro" },
-  { id: "data-center-virtualizacion", label: "Data Center & Virtualización" },
-  { id: "identidades-datos", label: "Identidades & Datos" },
-  { id: "proteccion-avanzada", label: "Protección Avanzada" },
-  { id: "deteccion-respuesta", label: "Detección & Respuesta" },
-  { id: "ciberseguridad-ofensiva", label: "Ciberseguridad Ofensiva" },
+  {
+    id: "infraestructura-conectividad-segura",
+    label: "Infraestructura y Conectividad Segura",
+  },
+  {
+    id: "ciberseguridad-proteccion",
+    label: "Ciberseguridad y Protección",
+  },
+  {
+    id: "data-center-respaldo-continuidad",
+    label: "Data Center, Respaldo y Continuidad",
+  },
+  {
+    id: "visibilidad-deteccion-respuesta",
+    label: "Visibilidad, Detección y Respuesta",
+  },
 ];
 
 export default function SolutionsIndexNav() {

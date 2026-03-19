@@ -10,45 +10,35 @@ gsap.registerPlugin(ScrollTrigger);
 const slidesData = [
   {
     id: "solution-slide-1",
-    title: "Red & Acceso Seguro",
+    title: "Infraestructura y Conectividad Segura",
+    titleLines: ["Infraestructura y", "Conectividad Segura"],
     number: "01",
     image: "/images/red-acceso-seguro.jpg",
-    href: "/soluciones#red-acceso-seguro",
+    href: "/soluciones#infraestructura-conectividad-segura",
   },
   {
     id: "solution-slide-2",
-    title: "Data Center & Virtualización",
+    title: "Ciberseguridad y Protección",
+    titleLines: ["Ciberseguridad", "y Protección"],
     number: "02",
-    image: "/images/data-center-virtualizacion.jpg",
-    href: "/soluciones#data-center-virtualizacion",
+    image: "/images/proteccion-avanzada.jpg",
+    href: "/soluciones#ciberseguridad-proteccion",
   },
   {
     id: "solution-slide-3",
-    title: "Identidades & Datos",
+    title: "Data Center, Respaldo y Continuidad",
+    titleLines: ["Data Center, Respaldo", "y Continuidad"],
     number: "03",
-    image: "/images/identidades-datos.jpg",
-    href: "/soluciones#identidades-datos",
+    image: "/images/data-center-virtualizacion.jpg",
+    href: "/soluciones#data-center-respaldo-continuidad",
   },
   {
     id: "solution-slide-4",
-    title: "Protección Avanzada",
+    title: "Visibilidad, Detección y Respuesta",
+    titleLines: ["Visibilidad, Detección", "y Respuesta"],
     number: "04",
-    image: "/images/proteccion-avanzada.jpg",
-    href: "/soluciones#proteccion-avanzada",
-  },
-  {
-    id: "solution-slide-5",
-    title: "Detección & Respuesta",
-    number: "05",
     image: "/images/deteccion-respuesta.jpg",
-    href: "/soluciones#deteccion-respuesta",
-  },
-  {
-    id: "solution-slide-6",
-    title: "Ciberseguridad Ofensiva",
-    number: "06",
-    image: "/images/ciberseguridad-ofensiva.jpg",
-    href: "/soluciones#ciberseguridad-ofensiva",
+    href: "/soluciones#visibilidad-deteccion-respuesta",
   },
 ];
 
@@ -90,9 +80,19 @@ export default function SolutionsSliderSection() {
         const item = slidesData[index];
         if (!item) return;
 
-        if (titleRef.current) titleRef.current.textContent = item.title;
-        if (numberRef.current) titleRef.current && (numberRef.current.textContent = `Solución ${item.number}`);
-        if (currentRef.current) currentRef.current.textContent = item.number;
+        if (titleRef.current) {
+          titleRef.current.innerHTML = item.titleLines
+            .map((line) => `<span class="solutions-slider-title-line">${line}</span>`)
+            .join("");
+        }
+
+        if (numberRef.current) {
+          numberRef.current.textContent = `Solución ${item.number}`;
+        }
+
+        if (currentRef.current) {
+          currentRef.current.textContent = item.number;
+        }
 
         cards.forEach((card, i) => {
           card.style.pointerEvents = i === index ? "auto" : "none";
@@ -284,7 +284,7 @@ export default function SolutionsSliderSection() {
           <div className="solutions-slider-counter">
             <span ref={currentRef}>01</span>
             <span>/</span>
-            <span>06</span>
+            <span>04</span>
           </div>
         </div>
 
@@ -294,7 +294,8 @@ export default function SolutionsSliderSection() {
           </span>
 
           <h2 ref={titleRef} className="solutions-slider-title">
-            Red & Acceso Seguro
+            <span className="solutions-slider-title-line">Infraestructura y</span>
+            <span className="solutions-slider-title-line">Conectividad Segura</span>
           </h2>
         </div>
 

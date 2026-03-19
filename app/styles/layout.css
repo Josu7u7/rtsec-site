@@ -13,11 +13,11 @@
 }
 
 .header-inner {
-  min-height: 96px;
+  min-height: 104px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
   transition: min-height 0.35s ease;
 }
 
@@ -32,14 +32,26 @@
   white-space: nowrap;
   min-width: 0;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .brand-logo {
   display: block;
   width: auto;
-  height: 78px;
-  max-width: 320px;
+  height: 96px;
+  max-width: 380px;
   object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(59, 130, 246, 0.18));
+  transition:
+    height 0.35s ease,
+    max-width 0.35s ease,
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.brand-mark:hover .brand-logo {
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 22px rgba(59, 130, 246, 0.24));
 }
 
 /* =========================
@@ -440,8 +452,8 @@
 
 @media (max-width: 1180px) {
   .header-inner {
-    min-height: 68px;
-    gap: 280px;
+    min-height: 92px;
+    gap: 22px;
   }
 
   .main-nav {
@@ -455,8 +467,8 @@
   }
 
   .brand-logo {
-    height: 46px;
-    max-width: 210px;
+    height: 82px;
+    max-width: 320px;
   }
 
   .contact-cta {
@@ -469,6 +481,7 @@
   .header-inner {
     grid-template-columns: auto auto;
     justify-content: space-between;
+    min-height: 84px;
   }
 
   .main-nav {
@@ -476,8 +489,8 @@
   }
 
   .brand-logo {
-    height: 58px;
-    max-width: 240px;
+    height: 74px;
+    max-width: 280px;
   }
 }
 
@@ -487,13 +500,13 @@
   }
 
   .header-inner {
-    min-height: 70px;
+    min-height: 76px;
     gap: 12px;
   }
 
   .brand-logo {
-    height: 48px;
-    max-width: 200px;
+    height: 60px;
+    max-width: 220px;
   }
 
   .contact-cta {
@@ -523,12 +536,12 @@
 
 @media (max-width: 560px) {
   .header-inner {
-    min-height: 64px;
+    min-height: 68px;
   }
 
   .brand-logo {
-    height: 42px;
-    max-width: 170px;
+    height: 104px;
+    max-width: 400px;
   }
 
   .contact-cta {
