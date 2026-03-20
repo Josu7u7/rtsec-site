@@ -6,11 +6,12 @@ const services = [
     eyebrow: "Servicio 01",
     title: "Consultoría y Arquitectura",
     intro:
-      "Convertimos requerimientos, riesgos y objetivos del negocio en una arquitectura clara, priorizada y lista para ejecutarse con criterio.",
+      "Definimos el estado actual, identificamos brechas y diseñamos la ruta técnica más adecuada para la organización.",
     image: "/images/Consultoría y Arquitectura.jpg",
     items: [
-      "Discovery y assessment de brechas, riesgos y requerimientos",
-      "HLD / LLD, dimensionamiento y criterios de decisión",
+      "Discovery y Assessment de brechas, riesgos y requerimientos",
+      "High-Level Design (HLD) y Low-Level Design (LLD)",
+      "Dimensionamiento y criterios de decisión",
       "Roadmap por fases y plan de adopción operativa",
     ],
   },
@@ -19,51 +20,41 @@ const services = [
     eyebrow: "Servicio 02",
     title: "Implementación e Integración",
     intro:
-      "Llevamos la estrategia a producción con orden técnico, control operativo y validación real para que la adopción sea segura y sostenible.",
+      "Ejecutamos despliegues controlados, seguros y alineados a la operación del cliente, integrando correctamente las capacidades tecnológicas necesarias.",
     image: "/images/Implementación e Integración.jpg",
     items: [
       "Plan de despliegue con pre-checks, respaldos y rollback",
       "Hardening e integraciones con AD, IdP, SIEM, ITSM, correo, APIs, PKI y NTP",
-      "Pruebas HA / DR / UAT, documentación y handover operativo",
+      "Pruebas HA / DR / UAT",
+      "Documentación y handover operativo",
     ],
   },
   {
-    id: "soporte-mantenimiento",
+    id: "soporte-mantenimiento-especializado",
     eyebrow: "Servicio 03",
-    title: "Soporte y Mantenimiento (SLA)",
+    title: "Soporte y Mantenimiento Especializado",
     intro:
-      "Sostenemos la operación con soporte escalonado, ajustes continuos y visibilidad de servicio para reducir fricción y mantener estabilidad.",
+      "Aseguramos la estabilidad, actualización y mejora continua de plataformas críticas mediante soporte técnico experto.",
     image: "/images/Soporte y Mantenimiento.jpg",
     items: [
       "Atención por niveles L1 / L2 / L3 con SLA y escalamiento",
-      "Parches, tuning, cambios menores y RCA",
-      "Reportes periódicos y control mediante ITSM y tickets",
+      "Parches, actualizaciones, tuning y cambios menores",
+      "RCA (Root Cause Analysis)",
+      "Reportes periódicos y control mediante ITSM / tickets",
     ],
   },
   {
     id: "servicios-gestionados",
     eyebrow: "Servicio 04",
-    title: "Servicios Gestionados (SOC/NOC)",
+    title: "Servicios Gestionados",
     intro:
-      "Monitoreamos y respondemos de forma continua para entregar visibilidad operativa, capacidad de contención y mejora constante.",
+      "Operamos capacidades específicas de monitoreo, detección, respuesta o infraestructura para reducir carga interna y mejorar la ejecución continua.",
     image: "/images/Servicios Gestionados (SOC:NOC).jpg",
     items: [
-      "Monitoreo 24/7 y gestión de eventos e incidentes con SLAs",
-      "Respuesta y contención basadas en playbooks",
+      "Monitoreo 24/7 y gestión de eventos e incidentes",
+      "Respuesta y contención basadas en playbooks y runbooks",
       "KPIs, reportes ejecutivos y mejora continua de cobertura",
-    ],
-  },
-  {
-    id: "gestion-exposicion",
-    eyebrow: "Servicio 05",
-    title: "Gestión de Exposición (VM/ASM)",
-    intro:
-      "Ayudamos a identificar exposición real, priorizar lo crítico y cerrar brechas con enfoque continuo sobre vulnerabilidad y superficie de ataque.",
-    image: "/images/Gestión de Exposición (VM:ASM).jpg",
-    items: [
-      "Escaneo continuo con priorización por criticidad y exposición",
-      "Integración con ITSM y SLAs de remediación",
-      "Verificación de cierre con re-scans y reporting",
+      "Operación parcial o total de capacidades definidas",
     ],
   },
 ];
@@ -111,7 +102,9 @@ export default function ServicesStackSection() {
               }`}
             >
               <div className="services-detail-block-copy">
-                <p className="services-detail-block-eyebrow">{service.eyebrow}</p>
+                <p className="services-detail-block-eyebrow">
+                  {service.eyebrow}
+                </p>
                 <h2 className="services-detail-block-title">{service.title}</h2>
                 <p className="services-detail-block-intro">{service.intro}</p>
 

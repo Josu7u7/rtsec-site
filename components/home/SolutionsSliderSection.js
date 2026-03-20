@@ -11,7 +11,6 @@ const slidesData = [
   {
     id: "solution-slide-1",
     title: "Infraestructura y Conectividad Segura",
-    titleLines: ["Infraestructura y", "Conectividad Segura"],
     number: "01",
     image: "/images/red-acceso-seguro.jpg",
     href: "/soluciones#infraestructura-conectividad-segura",
@@ -19,7 +18,6 @@ const slidesData = [
   {
     id: "solution-slide-2",
     title: "Ciberseguridad y Protección",
-    titleLines: ["Ciberseguridad", "y Protección"],
     number: "02",
     image: "/images/proteccion-avanzada.jpg",
     href: "/soluciones#ciberseguridad-proteccion",
@@ -27,7 +25,7 @@ const slidesData = [
   {
     id: "solution-slide-3",
     title: "Data Center, Respaldo y Continuidad",
-    titleLines: ["Data Center, Respaldo", "y Continuidad"],
+    displayTitle: ["Data Center, Respaldo", "y Continuidad"],
     number: "03",
     image: "/images/data-center-virtualizacion.jpg",
     href: "/soluciones#data-center-respaldo-continuidad",
@@ -35,7 +33,6 @@ const slidesData = [
   {
     id: "solution-slide-4",
     title: "Visibilidad, Detección y Respuesta",
-    titleLines: ["Visibilidad, Detección", "y Respuesta"],
     number: "04",
     image: "/images/deteccion-respuesta.jpg",
     href: "/soluciones#visibilidad-deteccion-respuesta",
@@ -81,9 +78,16 @@ export default function SolutionsSliderSection() {
         if (!item) return;
 
         if (titleRef.current) {
-          titleRef.current.innerHTML = item.titleLines
-            .map((line) => `<span class="solutions-slider-title-line">${line}</span>`)
-            .join("");
+          if (item.displayTitle?.length) {
+            titleRef.current.innerHTML = item.displayTitle
+              .map(
+                (line) =>
+                  `<span class="solutions-slider-title-line">${line}</span>`
+              )
+              .join("");
+          } else {
+            titleRef.current.innerHTML = `<span class="solutions-slider-title-line">${item.title}</span>`;
+          }
         }
 
         if (numberRef.current) {
@@ -279,7 +283,9 @@ export default function SolutionsSliderSection() {
 
       <div className="container-main solutions-slider-frame">
         <div className="solutions-slider-topbar">
-          <span className="solutions-slider-kicker">Explora nuestras soluciones</span>
+          <span className="solutions-slider-kicker">
+            Explora nuestras soluciones
+          </span>
 
           <div className="solutions-slider-counter">
             <span ref={currentRef}>01</span>
@@ -294,8 +300,9 @@ export default function SolutionsSliderSection() {
           </span>
 
           <h2 ref={titleRef} className="solutions-slider-title">
-            <span className="solutions-slider-title-line">Infraestructura y</span>
-            <span className="solutions-slider-title-line">Conectividad Segura</span>
+            <span className="solutions-slider-title-line">
+              Infraestructura y Conectividad Segura
+            </span>
           </h2>
         </div>
 
@@ -319,7 +326,9 @@ export default function SolutionsSliderSection() {
               </div>
 
               <div className="solutions-visual-card-overlay" />
-              <span className="solutions-visual-card-chip">RTSEC Active View</span>
+              <span className="solutions-visual-card-chip">
+                RTSEC Active View
+              </span>
             </button>
           ))}
         </div>
@@ -329,7 +338,9 @@ export default function SolutionsSliderSection() {
             <div className="solutions-progress-fill" />
           </div>
 
-          <span className="solutions-slider-scroll-label">Scroll para descubrir</span>
+          <span className="solutions-slider-scroll-label">
+            Scroll para descubrir
+          </span>
         </div>
       </div>
     </section>

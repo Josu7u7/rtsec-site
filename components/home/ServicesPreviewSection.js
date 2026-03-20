@@ -13,7 +13,7 @@ const services = [
     eyebrow: "Servicio 01",
     title: "Consultoría y Arquitectura",
     description:
-      "Definimos la ruta correcta antes de implementar. Evaluamos brechas, riesgos y requerimientos para convertir necesidades del negocio en decisiones técnicas claras.",
+      "Definimos el estado actual, identificamos brechas y diseñamos la ruta técnica más adecuada para la organización.",
     image: "/images/Consultoría y Arquitectura.jpg",
     href: "/servicios#consultoria-arquitectura",
   },
@@ -22,36 +22,27 @@ const services = [
     eyebrow: "Servicio 02",
     title: "Implementación e Integración",
     description:
-      "Llevamos la estrategia a producción con orden, validación y control. Cada despliegue se ejecuta con criterio operativo, pruebas y capacidad de reversa.",
+      "Ejecutamos despliegues controlados, seguros y alineados a la operación del cliente, integrando correctamente las capacidades tecnológicas necesarias.",
     image: "/images/Implementación e Integración.jpg",
     href: "/servicios#implementacion-integracion",
   },
   {
-    id: "soporte-mantenimiento",
+    id: "soporte-mantenimiento-especializado",
     eyebrow: "Servicio 03",
-    title: "Soporte y Mantenimiento (SLA)",
+    title: "Soporte y Mantenimiento Especializado",
     description:
-      "Sostenemos la operación con atención escalonada, ajustes continuos y control técnico, manteniendo estabilidad, trazabilidad y tiempos de respuesta claros.",
+      "Aseguramos la estabilidad, actualización y mejora continua de plataformas críticas mediante soporte técnico experto.",
     image: "/images/Soporte y Mantenimiento.jpg",
-    href: "/servicios#soporte-mantenimiento",
+    href: "/servicios#soporte-mantenimiento-especializado",
   },
   {
     id: "servicios-gestionados",
     eyebrow: "Servicio 04",
-    title: "Servicios Gestionados (SOC/NOC)",
+    title: "Servicios Gestionados",
     description:
-      "Monitoreamos, analizamos y respondemos de forma continua para dar visibilidad operativa y reducir el impacto de incidentes sobre el negocio.",
+      "Operamos capacidades específicas de monitoreo, detección, respuesta o infraestructura para reducir carga interna y mejorar la ejecución continua.",
     image: "/images/Servicios Gestionados (SOC:NOC).jpg",
     href: "/servicios#servicios-gestionados",
-  },
-  {
-    id: "gestion-exposicion",
-    eyebrow: "Servicio 05",
-    title: "Gestión de Exposición (VM/ASM)",
-    description:
-      "Identificamos exposición real, priorizamos lo crítico y ayudamos a cerrar brechas con una visión continua sobre vulnerabilidad y superficie de ataque.",
-    image: "/images/Gestión de Exposición (VM:ASM).jpg",
-    href: "/servicios#gestion-exposicion",
   },
 ];
 

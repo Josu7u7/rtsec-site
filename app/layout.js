@@ -15,6 +15,7 @@ import "./styles/about-page.css";
 import "./styles/contact-page.css";
 
 import Header from "../components/layout/Header";
+import WhatsAppFloatButton from "../components/layout/WhatsAppFloatButton";
 
 const baseUrl = "https://www.rtsec.com.pe";
 
@@ -130,6 +131,7 @@ export default function RootLayout({ children }) {
         />
         <Header />
         {children}
+        <WhatsAppFloatButton />
       </body>
     </html>
   );

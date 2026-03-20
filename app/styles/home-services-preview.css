@@ -38,7 +38,13 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(8, 12, 20, 0.16), transparent 24%, transparent 76%, rgba(8, 12, 20, 0.16)),
+    linear-gradient(
+      90deg,
+      rgba(8, 12, 20, 0.16),
+      transparent 24%,
+      transparent 76%,
+      rgba(8, 12, 20, 0.16)
+    ),
     radial-gradient(circle at 70% 50%, rgba(96, 165, 250, 0.08), transparent 34%);
   opacity: 0;
   pointer-events: none;
@@ -67,7 +73,7 @@
 }
 
 .services-preview-copy-top {
-  max-width: 560px;
+  max-width: 620px;
 }
 
 .services-preview-eyebrow {
@@ -80,18 +86,18 @@
 
 .services-preview-title {
   margin: 0;
-  max-width: 600px;
+  max-width: 640px;
   color: #f8fafc;
-  font-size: clamp(42px, 4.5vw, 78px);
-  line-height: 0.94;
-  letter-spacing: -0.065em;
+  font-size: clamp(38px, 4.2vw, 72px);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
   font-weight: 700;
   text-wrap: balance;
 }
 
 .services-preview-text {
   margin: 0;
-  max-width: 420px;
+  max-width: 440px;
   color: #a9bbd1;
   font-size: 17px;
   line-height: 1.9;
@@ -163,7 +169,8 @@
   }
 
   .services-preview-title {
-    font-size: clamp(36px, 4.8vw, 62px);
+    font-size: clamp(34px, 4.4vw, 58px);
+    max-width: 560px;
   }
 }
 
@@ -194,7 +201,9 @@
   }
 
   .services-preview-title {
-    font-size: clamp(34px, 7vw, 54px);
+    font-size: clamp(32px, 7vw, 50px);
+    max-width: 100%;
+    line-height: 0.98;
   }
 }
 
@@ -209,8 +218,8 @@
   }
 
   .services-preview-title {
-    font-size: clamp(30px, 11vw, 42px);
-    line-height: 0.98;
+    font-size: clamp(28px, 10vw, 40px);
+    line-height: 1;
   }
 
   .services-preview-text {

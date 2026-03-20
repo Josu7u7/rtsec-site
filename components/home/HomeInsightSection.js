@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function HomeInsightSection() {
   return (
@@ -26,13 +25,13 @@ export default function HomeInsightSection() {
             </ul>
 
             <div className="home-premium-actions">
-              <Link href="/contacto" className="home-premium-btn is-primary">
+              <a href="/contacto" className="home-premium-btn is-primary">
                 Evaluar mi operación
-              </Link>
+              </a>
 
-              <Link href="/soluciones" className="home-premium-btn is-secondary">
+              <a href="/soluciones" className="home-premium-btn is-secondary">
                 Explorar soluciones
-              </Link>
+              </a>
             </div>
           </div>
 

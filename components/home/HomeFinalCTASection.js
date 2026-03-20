@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function HomeFinalCTASection() {
   return (
     <section className="home-premium-section home-final-cta-section">
@@ -17,13 +15,13 @@ export default function HomeFinalCTASection() {
           </p>
 
           <div className="home-premium-actions">
-            <Link href="/contacto" className="home-premium-btn is-primary">
+            <a href="/contacto" className="home-premium-btn is-primary">
               Agendar una reunión
-            </Link>
+            </a>
 
-            <Link href="/servicios" className="home-premium-btn is-secondary">
+            <a href="/servicios" className="home-premium-btn is-secondary">
               Ver servicios
-            </Link>
+            </a>
           </div>
         </div>
       </div>
