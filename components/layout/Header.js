@@ -3,10 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { label: "Inicio", href: "/" },
@@ -21,46 +17,24 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [menuOpen]);
-
-  const cleanupBeforeNavigate = () => {
-    try {
-      document.body.style.overflow = "";
-
-      ScrollTrigger.getAll().forEach((trigger) => {
-        try {
-          trigger.kill(true);
-        } catch {}
-      });
-
-      document.querySelectorAll(".pin-spacer").forEach((spacer) => {
-        try {
-          const parent = spacer.parentNode;
-          if (!parent) return;
-
-          while (spacer.firstChild) {
-            parent.insertBefore(spacer.firstChild, spacer);
-          }
-
-          parent.removeChild(spacer);
-        } catch {}
-      });
-    } catch {}
-  };
 
   const handleNavigate = (event, href) => {
     event.preventDefault();
     setMenuOpen(false);
-    cleanupBeforeNavigate();
     window.location.href = href;
-  };
-
-  const handleOverlayClose = () => {
-    setMenuOpen(false);
   };
 
   return (
@@ -106,7 +80,7 @@ export default function Header() {
           <div className="header-actions">
             <a
               href="/contacto"
-              className="contact-cta"
+              className="contact-cta desktop-contact-cta"
               aria-label="Contáctanos"
               onClick={(e) => handleNavigate(e, "/contacto")}
             >
@@ -147,7 +121,7 @@ export default function Header() {
 
       <div
         className={`mobile-nav-overlay ${menuOpen ? "is-open" : ""}`}
-        onClick={handleOverlayClose}
+        onClick={() => setMenuOpen(false)}
       >
         <div
           className={`mobile-nav-panel ${menuOpen ? "is-open" : ""}`}
@@ -175,7 +149,8 @@ export default function Header() {
               aria-label="Cerrar menú"
               onClick={() => setMenuOpen(false)}
             >
-              ✕
+              <span />
+              <span />
             </button>
           </div>
 
