@@ -96,7 +96,7 @@ export default function RootLayout({ children }) {
     url: baseUrl,
     logo: `${baseUrl}/images/rtsec-logo.svg`,
     image: `${baseUrl}/images/hero-rtsec.jpg`,
-    email: "ventas@rtsec.com.pe",
+    email: "info@rtsec.com.pe",
     sameAs: ["https://www.linkedin.com/company/rtsec-peru/"],
     description:
       "Empresa especializada en ciberseguridad, infraestructura, conectividad y continuidad operativa.",

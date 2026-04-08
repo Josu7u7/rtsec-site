@@ -70,7 +70,7 @@ Mensaje:
 ${form.mensaje}`
     );
 
-    window.location.href = `mailto:contacto@rtsec.com.pe?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@rtsec.com.pe?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -132,7 +132,7 @@ ${form.mensaje}`
               <div className="contact-direct-block">
                 <div>
                   <small>Correo</small>
-                  <a href="mailto:contacto@rtsec.com.pe">contacto@rtsec.com.pe</a>
+                  <a href="mailto:info@rtsec.com.pe">info@rtsec.com.pe</a>
                 </div>
 
                 <div>

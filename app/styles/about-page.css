@@ -307,77 +307,116 @@
 }
 
 /* -------------------------
-   Purpose / Vision
+   Mission / Vision
 ------------------------- */
 .about-purpose-section {
-  padding: 0 0 140px;
+  position: relative;
+  padding: 12px 0 140px;
+}
+
+.about-purpose-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 20%, rgba(59, 130, 246, 0.09), transparent 26%),
+    radial-gradient(circle at 78% 78%, rgba(255, 255, 255, 0.025), transparent 18%);
+  pointer-events: none;
 }
 
 .about-purpose-header {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
   margin-bottom: 34px;
 }
 
-.about-purpose-visual {
-  overflow: hidden;
-  border-radius: 32px;
-  background: #0a111d;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow:
-    0 28px 80px rgba(0, 0, 0, 0.32),
-    0 0 0 1px rgba(255, 255, 255, 0.03);
-  margin-bottom: 26px;
-  min-height: 470px;
+.about-purpose-main-title {
+  margin: 0;
+  max-width: 980px;
+  font-size: clamp(40px, 5.6vw, 92px);
+  line-height: 0.92;
+  letter-spacing: -0.07em;
+  font-weight: 700;
+  color: #f8fafc;
+  text-wrap: balance;
 }
 
-.about-purpose-image {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.7s ease;
-}
-
-.about-purpose-visual:hover .about-purpose-image {
-  transform: scale(1.03);
+.about-purpose-support {
+  margin: 22px 0 0;
+  max-width: 720px;
+  color: #9eb1c8;
+  font-size: 18px;
+  line-height: 1.85;
 }
 
 .about-purpose-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 22px;
+  align-items: stretch;
 }
 
 .about-purpose-card {
-  min-height: 280px;
-  padding: 30px;
-  border-radius: 28px;
+  position: relative;
+  min-height: 320px;
+  padding: 34px;
+  border-radius: 30px;
+  overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(10, 16, 30, 0.94), rgba(6, 9, 16, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.06);
+    linear-gradient(180deg, rgba(11, 18, 34, 0.96), rgba(6, 10, 18, 0.99));
+  border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow:
-    0 20px 56px rgba(0, 0, 0, 0.24),
+    0 22px 62px rgba(0, 0, 0, 0.26),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition:
     transform 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-purpose-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 28%);
+  pointer-events: none;
 }
 
 .about-purpose-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(96, 165, 250, 0.16);
+  transform: translateY(-5px);
+  border-color: rgba(96, 165, 250, 0.2);
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.32),
+    0 0 36px rgba(59, 130, 246, 0.07);
+}
+
+.about-purpose-card .about-copy-label {
+  position: relative;
+  z-index: 2;
 }
 
 .about-purpose-card h3 {
+  position: relative;
+  z-index: 2;
   margin: 0;
   max-width: 560px;
-  font-size: clamp(28px, 3vw, 46px);
-  line-height: 0.98;
-  letter-spacing: -0.05em;
+  font-size: clamp(30px, 3.2vw, 52px);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
   color: #f8fafc;
+  text-wrap: balance;
 }
 
 .about-purpose-card p {
-  margin: 20px 0 0;
+  position: relative;
+  z-index: 2;
+  margin: 22px 0 0;
+  max-width: 560px;
   color: #9eb1c8;
   font-size: 16px;
   line-height: 1.85;
@@ -440,8 +479,11 @@
   }
 
   .about-identity-image-shell,
-  .about-values-feature-media,
-  .about-purpose-visual {
+  .about-values-feature-media {
+    min-height: auto;
+  }
+
+  .about-purpose-card {
     min-height: auto;
   }
 }
@@ -459,6 +501,7 @@
   .about-hero-text,
   .about-section-text,
   .about-values-feature-copy p,
+  .about-purpose-support,
   .about-purpose-card p,
   .about-cta-card p {
     font-size: 16px;
@@ -477,8 +520,18 @@
   }
 
   .about-cta-card h2,
-  .about-section-title {
+  .about-section-title,
+  .about-purpose-main-title {
     font-size: clamp(28px, 9vw, 42px);
+    line-height: 1.02;
+  }
+
+  .about-purpose-header {
+    margin-bottom: 24px;
+  }
+
+  .about-purpose-card h3 {
+    font-size: clamp(26px, 8vw, 38px);
     line-height: 1.02;
   }
 }

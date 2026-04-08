@@ -2,7 +2,7 @@
 
 export default function WhatsAppFloatButton() {
   const whatsappUrl =
-    "https://wa.me/51933719297?text=Hola%2C%20quiero%20agendar%20una%20reuni%C3%B3n%20con%20RTSEC.";
+    "https://wa.me/51925252585?text=Hola%2C%20quiero%20agendar%20una%20reuni%C3%B3n%20con%20RTSEC.";
 
   return (
     <a

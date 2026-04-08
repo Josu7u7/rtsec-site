@@ -9,10 +9,10 @@ const services = [
       "Definimos el estado actual, identificamos brechas y diseñamos la ruta técnica más adecuada para la organización.",
     image: "/images/Consultoría y Arquitectura.jpg",
     items: [
-      "Discovery y Assessment de brechas, riesgos y requerimientos",
-      "High-Level Design (HLD) y Low-Level Design (LLD)",
+      "Evaluación de necesidades, riesgos y oportunidades de mejora",
+      "Diseño de arquitectura y definición de alcance",
       "Dimensionamiento y criterios de decisión",
-      "Roadmap por fases y plan de adopción operativa",
+      "Hoja de ruta por fases para una adopción ordenada",
     ],
   },
   {
@@ -23,10 +23,10 @@ const services = [
       "Ejecutamos despliegues controlados, seguros y alineados a la operación del cliente, integrando correctamente las capacidades tecnológicas necesarias.",
     image: "/images/Implementación e Integración.jpg",
     items: [
-      "Plan de despliegue con pre-checks, respaldos y rollback",
-      "Hardening e integraciones con AD, IdP, SIEM, ITSM, correo, APIs, PKI y NTP",
-      "Pruebas HA / DR / UAT",
-      "Documentación y handover operativo",
+      "Plan de despliegue con validaciones previas, respaldos y rollback",
+      "Configuración segura e integración con plataformas clave de la operación",
+      "Pruebas de disponibilidad, DR recuperación y UAT validación operativa",
+      "Documentación técnica y transferencia ordenada hacia la operación",
     ],
   },
   {
@@ -38,8 +38,8 @@ const services = [
     image: "/images/Soporte y Mantenimiento.jpg",
     items: [
       "Atención por niveles L1 / L2 / L3 con SLA y escalamiento",
-      "Parches, actualizaciones, tuning y cambios menores",
-      "RCA (Root Cause Analysis)",
+      "Actualizaciones, ajustes y optimización continua",
+      "RCA - Análisis de causa raíz ante incidentes relevantes",
       "Reportes periódicos y control mediante ITSM / tickets",
     ],
   },
@@ -51,10 +51,10 @@ const services = [
       "Operamos capacidades específicas de monitoreo, detección, respuesta o infraestructura para reducir carga interna y mejorar la ejecución continua.",
     image: "/images/Servicios Gestionados (SOC:NOC).jpg",
     items: [
-      "Monitoreo 24/7 y gestión de eventos e incidentes",
-      "Respuesta y contención basadas en playbooks y runbooks",
-      "KPIs, reportes ejecutivos y mejora continua de cobertura",
-      "Operación parcial o total de capacidades definidas",
+      "Monitoreo continuo y gestión de eventos e incidentes",
+      "Respuesta y contención basadas en procedimientos definidos",
+      "Indicadores, reportes ejecutivos y mejora continua",
+      "Operación parcial o total de capacidades críticas",
     ],
   },
 ];

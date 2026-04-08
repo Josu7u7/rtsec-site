@@ -69,7 +69,7 @@ export default function AboutPage() {
       });
 
       gsap.fromTo(
-        ".about-identity-image-shell img, .about-values-feature-media img, .about-purpose-visual img",
+        ".about-identity-image-shell img, .about-values-feature-media img",
         { scale: 1.08 },
         {
           scale: 1,
@@ -239,26 +239,22 @@ export default function AboutPage() {
       <section className="about-purpose-section">
         <div className="container-main">
           <div className="about-purpose-header about-reveal">
-            <p className="about-kicker">Propósito y dirección</p>
-            <h2 className="about-section-title">
-              Proteger lo que no puede detenerse. Elevar el estándar de cómo operan las organizaciones.
+            <p className="about-kicker">Nuestra dirección</p>
+            <h2 className="about-purpose-main-title">
+              Misión y visión que sostienen cómo operamos.
             </h2>
-          </div>
-
-          <div className="about-purpose-visual about-reveal">
-            <Image
-              src="/about-purpose-future.jpg"
-              alt="Propósito y visión futura de RTSEC"
-              width={1800}
-              height={1200}
-              className="about-purpose-image"
-            />
+            <p className="about-purpose-support">
+              No se trata solo de lo que hacemos, sino de cómo entendemos la
+              continuidad, la protección y la evolución de cada entorno.
+            </p>
           </div>
 
           <div className="about-purpose-grid">
             <article className="about-purpose-card">
               <span className="about-copy-label">Nuestra misión</span>
-              <h3>Proteger lo crítico con criterio técnico y visión operativa.</h3>
+              <h3>
+                Proteger lo crítico con criterio técnico y visión operativa.
+              </h3>
               <p>
                 Ayudamos a las organizaciones a transformar complejidad
                 tecnológica en arquitectura, seguridad y conectividad diseñadas
@@ -268,7 +264,9 @@ export default function AboutPage() {
 
             <article className="about-purpose-card">
               <span className="about-copy-label">Nuestra visión</span>
-              <h3>Construir entornos más resilientes, más visibles y mejor preparados.</h3>
+              <h3>
+                Construir entornos más resilientes, más visibles y mejor preparados.
+              </h3>
               <p>
                 Queremos elevar la forma en que operan las empresas, integrando
                 infraestructura y ciberseguridad como una ventaja real, no como
