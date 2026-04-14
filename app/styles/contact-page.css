@@ -210,9 +210,9 @@
     box-shadow 0.25s ease;
 }
 
-.contact-field select {
-  padding-top: 18px;
-  padding-bottom: 18px;
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: transparent;
 }
 
 .contact-field textarea {
@@ -252,6 +252,47 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #9dc1ff;
+}
+
+/* select */
+.contact-select-field {
+  position: relative;
+}
+
+.contact-select-field select {
+  padding: 18px 52px 18px 18px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  color: #f8fafc;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.025);
+}
+
+.contact-select-field select.has-value {
+  color: #f8fafc;
+}
+
+.contact-select-field select option {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.contact-select-field select option[disabled] {
+  color: #64748b;
+}
+
+.contact-select-arrow {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9dc1ff;
+  font-size: 15px;
+  pointer-events: none;
+  line-height: 1;
 }
 
 .contact-field-full {

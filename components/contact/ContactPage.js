@@ -196,15 +196,18 @@ ${form.mensaje}`
                   </div>
                 </div>
 
-                <div className="contact-field contact-field-full">
+                <div className="contact-field contact-field-full contact-select-field">
                   <select
                     id="servicio"
                     name="servicio"
                     value={form.servicio}
                     onChange={handleChange}
                     required
+                    className={form.servicio ? "has-value" : ""}
                   >
-                    <option value="">Selecciona un enfoque</option>
+                    <option value="" disabled>
+                      Selecciona un enfoque
+                    </option>
                     <option value="Consultoría y arquitectura">
                       Consultoría y arquitectura
                     </option>
@@ -217,13 +220,13 @@ ${form.mensaje}`
                     <option value="Servicios gestionados">
                       Servicios gestionados
                     </option>
-                    <option value="Capacitación">
-                      Capacitación
-                    </option>
-                    <option value="Otro">
-                      Otro
-                    </option>
+                    <option value="Capacitación">Capacitación</option>
+                    <option value="Otro">Otro</option>
                   </select>
+
+                  <span className="contact-select-arrow" aria-hidden="true">
+                    ▾
+                  </span>
                 </div>
 
                 <div className="contact-field contact-field-full contact-textarea">
