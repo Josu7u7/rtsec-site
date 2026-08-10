@@ -8,23 +8,30 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const values = [
+const process = [
   {
-    title: "Precisión",
-    text: "Diseñamos con criterio técnico, claridad operativa y foco real en continuidad.",
+    number: "01",
+    title: "Entender",
+    text: "Antes de proponer tecnología, entendemos cómo funciona la operación.",
   },
   {
-    title: "Resiliencia",
-    text: "Construimos entornos preparados para soportar presión, crecimiento y cambio.",
+    number: "02",
+    title: "Diseñar",
+    text: "La arquitectura viene primero. La marca y el producto vienen después.",
   },
   {
-    title: "Visión",
-    text: "No implementamos por tendencia. Elegimos capacidades que sostienen negocio.",
+    number: "03",
+    title: "Acompañar",
+    text: "Implementamos pensando también en lo que ocurrirá después del proyecto.",
   },
-  {
-    title: "Confianza",
-    text: "Cada decisión debe traducirse en control, visibilidad y seguridad sostenible.",
-  },
+];
+
+const capabilities = [
+  "Seguridad",
+  "Infraestructura",
+  "Redes",
+  "Continuidad",
+  "Visibilidad",
 ];
 
 export default function AboutPage() {
@@ -32,88 +39,158 @@ export default function AboutPage() {
 
   useEffect(() => {
     const page = pageRef.current;
+
     if (!page) return;
 
     const ctx = gsap.context(() => {
+      /* =====================================================
+         HERO
+      ====================================================== */
+
       gsap.fromTo(
-        ".about-hero-reveal",
-        { y: 44, opacity: 0, filter: "blur(10px)" },
+        ".about-new-hero-line > span",
         {
-          y: 0,
+          yPercent: 110,
+        },
+        {
+          yPercent: 0,
+          duration: 1.15,
+          stagger: 0.08,
+          ease: "power4.out",
+        }
+      );
+
+      gsap.fromTo(
+        ".about-new-hero-intro",
+        {
+          opacity: 0,
+          y: 20,
+        },
+        {
           opacity: 1,
-          filter: "blur(0px)",
-          duration: 1,
-          stagger: 0.12,
+          y: 0,
+          duration: 0.9,
+          delay: 0.5,
           ease: "power3.out",
         }
       );
 
-      gsap.utils.toArray(".about-reveal").forEach((item, index) => {
+      /* =====================================================
+         GENERIC REVEALS
+      ====================================================== */
+
+      gsap.utils.toArray(".about-new-reveal").forEach((element) => {
         gsap.fromTo(
-          item,
-          { y: 46, opacity: 0, filter: "blur(8px)" },
+          element,
           {
-            y: 0,
+            opacity: 0,
+            y: 45,
+          },
+          {
             opacity: 1,
-            filter: "blur(0px)",
+            y: 0,
             duration: 0.95,
-            delay: index * 0.03,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: item,
-              start: "top 84%",
+              trigger: element,
+              start: "top 86%",
               once: true,
             },
           }
         );
       });
 
+      /* =====================================================
+         PHOTO PARALLAX
+      ====================================================== */
+
       gsap.fromTo(
-        ".about-identity-image-shell img, .about-values-feature-media img",
-        { scale: 1.08 },
+        ".about-new-photo img",
+        {
+          scale: 1.08,
+          yPercent: -2,
+        },
         {
           scale: 1,
+          yPercent: 2,
           ease: "none",
           scrollTrigger: {
-            trigger: page,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
+            trigger: ".about-new-photo",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.1,
           },
         }
       );
 
-      gsap.fromTo(
-        ".about-values-card",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".about-values-grid",
-            start: "top 82%",
-            once: true,
-          },
-        }
-      );
+      /* =====================================================
+         PROCESS
+      ====================================================== */
 
       gsap.fromTo(
-        ".about-purpose-card",
-        { y: 34, opacity: 0, scale: 0.985 },
+        ".about-new-process-item",
         {
-          y: 0,
+          opacity: 0,
+          y: 30,
+        },
+        {
           opacity: 1,
-          scale: 1,
-          duration: 0.9,
+          y: 0,
           stagger: 0.12,
+          duration: 0.85,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".about-purpose-grid",
+            trigger: ".about-new-process-list",
             start: "top 82%",
             once: true,
+          },
+        }
+      );
+
+      /* =====================================================
+         INTERLACED CAPABILITIES
+      ====================================================== */
+
+      gsap.utils.toArray(".about-new-capability").forEach((item, index) => {
+        const startX = index % 2 === 0 ? -160 : 160;
+        const endX = index % 2 === 0 ? 160 : -160;
+
+        gsap.fromTo(
+          item,
+          {
+            x: startX,
+          },
+          {
+            x: endX,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".about-new-capabilities",
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.35,
+            },
+          }
+        );
+      });
+
+      /* =====================================================
+         CULTURE WORDS
+      ====================================================== */
+
+      gsap.fromTo(
+        ".about-new-culture-word",
+        {
+          opacity: 0.15,
+        },
+        {
+          opacity: 1,
+          stagger: 0.12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".about-new-culture-title",
+            start: "top 78%",
+            end: "center 45%",
+            scrub: 1,
           },
         }
       );
@@ -123,112 +200,109 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main ref={pageRef} className="about-page">
-      <section className="about-hero-section">
+    <main ref={pageRef} className="about-new">
+      {/* =====================================================
+          HERO
+      ====================================================== */}
+
+      <section className="about-new-hero">
         <div className="container-main">
-          <div className="about-hero-shell">
-            <p className="about-kicker about-hero-reveal">Nosotros</p>
+          <div className="about-new-hero-intro">
+            <span className="about-new-label">Nosotros / RTSEC</span>
+          </div>
 
-            <h1 className="about-hero-title about-hero-reveal">
-              No seguimos la inercia del mercado.
-              <span>Diseñamos capacidad, control y ventaja operativa.</span>
-            </h1>
+          <h1 className="about-new-hero-title">
+            <span className="about-new-hero-line">
+              <span>Somos técnicos.</span>
+            </span>
 
-            <p className="about-hero-text about-hero-reveal">
-              RTSEC integra ciberseguridad, infraestructura y conectividad para
-              organizaciones que necesitan operar con criterio, resiliencia y
-              dirección clara.
+            <span className="about-new-hero-line">
+              <span>Nos gusta resolver</span>
+            </span>
+
+            <span className="about-new-hero-line about-new-hero-line-muted">
+              <span>problemas difíciles.</span>
+            </span>
+          </h1>
+
+          <div className="about-new-hero-description about-new-hero-intro">
+            <p>
+              Diseñamos, implementamos y protegemos la infraestructura sobre la
+              que operan las empresas.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="about-identity-section">
+      {/* =====================================================
+          PHOTO + APPROACH
+      ====================================================== */}
+
+      <section className="about-new-intro">
         <div className="container-main">
-          <div className="about-section-heading about-reveal">
-            <p className="about-kicker">Nuestra identidad</p>
-            <h2 className="about-section-title">
-              Donde la exigencia técnica se encuentra con visión estratégica.
-            </h2>
-            <p className="about-section-text">
-              No construimos presencia. Construimos capacidad. Diseñamos
-              arquitectura, seguridad e infraestructura para entornos donde
-              improvisar no es una opción.
-            </p>
-          </div>
-
-          <div className="about-identity-layout">
-            <div className="about-identity-copy about-reveal">
-              <div className="about-identity-copy-block">
-                <span className="about-copy-label">Lo que nos impulsa</span>
-                <p>
-                  Convertir complejidad tecnológica en decisiones claras,
-                  arquitecturas sólidas y operaciones preparadas para crecer bajo
-                  presión.
-                </p>
-              </div>
-
-              <div className="about-identity-copy-block">
-                <span className="about-copy-label">Cómo pensamos</span>
-                <p>
-                  Cada componente debe responder a una necesidad real del
-                  negocio: continuidad, visibilidad, rendimiento, seguridad y
-                  escalabilidad.
-                </p>
-              </div>
-            </div>
-
-            <div className="about-identity-image-shell about-reveal">
+          <div className="about-new-intro-grid">
+            <div className="about-new-photo about-new-reveal">
               <Image
-                src="/about-identity-main.jpg"
-                alt="Identidad estratégica de RTSEC"
-                width={1800}
-                height={1200}
-                className="about-identity-image"
+                src="/images/about-rtsec-real.jpg"
+                alt="Trabajo técnico sobre infraestructura de red"
+                width={1200}
+                height={1600}
+                sizes="(max-width: 1024px) 100vw, 68vw"
+                className="about-new-photo-image"
               />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="about-values-section">
-        <div className="container-main">
-          <div className="about-values-top about-reveal">
-            <p className="about-kicker">Lo que defendemos</p>
-            <h2 className="about-section-title">
-              Una forma de operar basada en profundidad, criterio y dirección.
-            </h2>
-          </div>
-
-          <div className="about-values-feature about-reveal">
-            <div className="about-values-feature-media">
-              <Image
-                src="/about-values-panel.jpg"
-                alt="Valores y cultura de RTSEC"
-                width={1800}
-                height={1200}
-                className="about-values-feature-image"
-              />
+              <span className="about-new-photo-caption">
+                Trabajo de campo / RTSEC
+              </span>
             </div>
 
-            <div className="about-values-feature-copy">
-              <span className="about-copy-label">Cultura técnica</span>
-              <h3>No vendemos ruido. Diseñamos ventaja real.</h3>
+            <div className="about-new-intro-copy about-new-reveal">
+              <span className="about-new-label">Cómo trabajamos</span>
+
+              <h2>
+                Primero entendemos.
+                <br />
+                Después diseñamos.
+              </h2>
+
               <p>
-                Nuestra cultura se apoya en disciplina técnica, aprendizaje
-                continuo y una convicción simple: cada decisión tecnológica debe
-                fortalecer control, estabilidad y evolución operativa.
+                No empezamos por un fabricante ni por un producto. Empezamos
+                entendiendo qué debe funcionar, qué necesita protegerse y qué
+                no puede fallar.
               </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="about-values-grid">
-            {values.map((item, index) => (
-              <article key={item.title} className="about-values-card">
-                <span className="about-values-card-index">
-                  {String(index + 1).padStart(2, "0")}
+      {/* =====================================================
+          PROCESS
+      ====================================================== */}
+
+      <section className="about-new-process">
+        <div className="container-main">
+          <div className="about-new-process-head about-new-reveal">
+            <span className="about-new-label">Nuestra forma de trabajar</span>
+
+            <h2>
+              Menos discurso.
+              <br />
+              Más criterio.
+            </h2>
+          </div>
+
+          <div className="about-new-process-list">
+            {process.map((item) => (
+              <article
+                className="about-new-process-item"
+                key={item.number}
+              >
+                <span className="about-new-process-number">
+                  {item.number}
                 </span>
+
                 <h3>{item.title}</h3>
+
                 <p>{item.text}</p>
               </article>
             ))}
@@ -236,63 +310,113 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="about-purpose-section">
-        <div className="container-main">
-          <div className="about-purpose-header about-reveal">
-            <p className="about-kicker">Nuestra dirección</p>
-            <h2 className="about-purpose-main-title">
-              Misión y visión que sostienen cómo operamos.
-            </h2>
-            <p className="about-purpose-support">
-              No se trata solo de lo que hacemos, sino de cómo entendemos la
-              continuidad, la protección y la evolución de cada entorno.
+      {/* =====================================================
+          INTERLACED CAPABILITIES
+      ====================================================== */}
+
+      <section className="about-new-capabilities">
+        <div className="about-new-capabilities-sticky">
+          <div className="about-new-capabilities-heading">
+            <span className="about-new-label">Una visión integrada</span>
+
+            <p>
+              La infraestructura, la conectividad y la seguridad no funcionan
+              por separado.
             </p>
           </div>
 
-          <div className="about-purpose-grid">
-            <article className="about-purpose-card">
-              <span className="about-copy-label">Nuestra misión</span>
-              <h3>
-                Proteger lo crítico con criterio técnico y visión operativa.
-              </h3>
-              <p>
-                Ayudamos a las organizaciones a transformar complejidad
-                tecnológica en arquitectura, seguridad y conectividad diseñadas
-                para sostener continuidad, control y crecimiento.
-              </p>
-            </article>
+          <div className="about-new-capabilities-list">
+            {capabilities.map((item) => (
+              <div
+                className="about-new-capability"
+                key={item}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
 
-            <article className="about-purpose-card">
-              <span className="about-copy-label">Nuestra visión</span>
-              <h3>
-                Construir entornos más resilientes, más visibles y mejor preparados.
-              </h3>
-              <p>
-                Queremos elevar la forma en que operan las empresas, integrando
-                infraestructura y ciberseguridad como una ventaja real, no como
-                un complemento tardío.
-              </p>
-            </article>
+          <div className="about-new-capabilities-footer">
+            <h2>
+              Todo está conectado.
+              <span>Nosotros diseñamos cómo.</span>
+            </h2>
           </div>
         </div>
       </section>
 
-      <section className="about-cta-section">
-        <div className="container-main">
-          <div className="about-cta-card about-reveal">
-            <p className="about-kicker">RTSEC Perú</p>
-            <h2>Diseñamos infraestructura y seguridad para organizaciones que exigen más.</h2>
-            <p>
-              Arquitectura, conectividad y ciberseguridad pensadas para operar
-              con control, claridad y resiliencia.
-            </p>
+      {/* =====================================================
+          CULTURE
+      ====================================================== */}
 
-            <div className="about-cta-actions">
-              <Link href="/contacto" className="about-btn about-btn-primary">
-                Hablar con RTSEC
-              </Link>
-              <Link href="/soluciones" className="about-btn about-btn-secondary">
-                Ver soluciones
+      <section className="about-new-culture">
+        <div className="container-main">
+          <div className="about-new-culture-head about-new-reveal">
+            <span className="about-new-label">Cultura técnica</span>
+          </div>
+
+          <h2 className="about-new-culture-title">
+            <span className="about-new-culture-word">Probamos.</span>
+            <span className="about-new-culture-word">Rompemos.</span>
+            <span className="about-new-culture-word">Entendemos.</span>
+            <span className="about-new-culture-word">Documentamos.</span>
+            <span className="about-new-culture-word">
+              Volvemos a probar.
+            </span>
+          </h2>
+
+          <div className="about-new-culture-footer about-new-reveal">
+            <div className="about-new-culture-line" />
+
+            <div className="about-new-culture-copy">
+              <p>
+                Buena parte de lo que sabemos nace del laboratorio, del campo y
+                de enfrentarnos a problemas reales.
+              </p>
+
+              <p>
+                Cuando algo falla, no buscamos únicamente que vuelva a
+                funcionar. Buscamos entender por qué ocurrió.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          STATEMENT
+      ====================================================== */}
+
+      <section className="about-new-statement">
+        <div className="container-main">
+          <div className="about-new-statement-inner about-new-reveal">
+            <span className="about-new-label">RTSEC Perú</span>
+
+            <h2>
+              Somos una empresa joven.
+              <span>
+                La experiencia técnica con la que trabajamos no empezó ayer.
+              </span>
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          CTA
+      ====================================================== */}
+
+      <section className="about-new-cta">
+        <div className="container-main">
+          <div className="about-new-cta-inner about-new-reveal">
+            <span className="about-new-label">Hablemos</span>
+
+            <div className="about-new-cta-content">
+              <h2>¿Tienes un reto técnico?</h2>
+
+              <Link href="/contacto" className="about-new-cta-link">
+                <span>Cuéntanoslo</span>
+                <span className="about-new-cta-arrow">↗</span>
               </Link>
             </div>
           </div>
