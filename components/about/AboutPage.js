@@ -12,26 +12,30 @@ const process = [
   {
     number: "01",
     title: "Entender",
-    text: "Antes de proponer tecnología, entendemos cómo funciona la operación.",
+    text: "Contexto, operación y restricciones.",
   },
   {
     number: "02",
     title: "Diseñar",
-    text: "La arquitectura viene primero. La marca y el producto vienen después.",
+    text: "Arquitectura antes que producto.",
   },
   {
     number: "03",
+    title: "Implementar",
+    text: "Cambios controlados, pruebas y validación.",
+  },
+  {
+    number: "04",
     title: "Acompañar",
-    text: "Implementamos pensando también en lo que ocurrirá después del proyecto.",
+    text: "Seguimiento después de la entrega.",
   },
 ];
 
 const capabilities = [
   "Seguridad",
   "Infraestructura",
-  "Redes",
+  "Conectividad",
   "Continuidad",
-  "Visibilidad",
 ];
 
 export default function AboutPage() {
@@ -39,8 +43,9 @@ export default function AboutPage() {
 
   useEffect(() => {
     const page = pageRef.current;
-
     if (!page) return;
+
+    const mm = gsap.matchMedia();
 
     const ctx = gsap.context(() => {
       /* =====================================================
@@ -48,29 +53,29 @@ export default function AboutPage() {
       ====================================================== */
 
       gsap.fromTo(
-        ".about-new-hero-line > span",
+        ".about-hero-line > span",
         {
-          yPercent: 110,
+          yPercent: 115,
         },
         {
           yPercent: 0,
-          duration: 1.15,
+          duration: 1.1,
           stagger: 0.08,
           ease: "power4.out",
         }
       );
 
       gsap.fromTo(
-        ".about-new-hero-intro",
+        ".about-hero-fade",
         {
           opacity: 0,
-          y: 20,
+          y: 18,
         },
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
-          delay: 0.5,
+          duration: 0.85,
+          delay: 0.45,
           ease: "power3.out",
         }
       );
@@ -79,12 +84,12 @@ export default function AboutPage() {
          GENERIC REVEALS
       ====================================================== */
 
-      gsap.utils.toArray(".about-new-reveal").forEach((element) => {
+      gsap.utils.toArray(".about-reveal").forEach((element) => {
         gsap.fromTo(
           element,
           {
             opacity: 0,
-            y: 45,
+            y: 40,
           },
           {
             opacity: 1,
@@ -105,9 +110,9 @@ export default function AboutPage() {
       ====================================================== */
 
       gsap.fromTo(
-        ".about-new-photo img",
+        ".about-approach-image img",
         {
-          scale: 1.08,
+          scale: 1.06,
           yPercent: -2,
         },
         {
@@ -115,7 +120,7 @@ export default function AboutPage() {
           yPercent: 2,
           ease: "none",
           scrollTrigger: {
-            trigger: ".about-new-photo",
+            trigger: ".about-approach-media",
             start: "top bottom",
             end: "bottom top",
             scrub: 1.1,
@@ -128,148 +133,169 @@ export default function AboutPage() {
       ====================================================== */
 
       gsap.fromTo(
-        ".about-new-process-item",
+        ".about-process-item",
         {
           opacity: 0,
-          y: 30,
+          y: 34,
         },
         {
           opacity: 1,
           y: 0,
-          stagger: 0.12,
-          duration: 0.85,
+          duration: 0.8,
+          stagger: 0.11,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".about-new-process-list",
+            trigger: ".about-process-grid",
             start: "top 82%",
             once: true,
           },
         }
       );
 
-      /* =====================================================
-         INTERLACED CAPABILITIES
-      ====================================================== */
+      gsap.utils.toArray(".about-process-item").forEach((item) => {
+        const number = item.querySelector(".about-process-number");
 
-      gsap.utils.toArray(".about-new-capability").forEach((item, index) => {
-        const startX = index % 2 === 0 ? -160 : 160;
-        const endX = index % 2 === 0 ? 160 : -160;
-
-        gsap.fromTo(
-          item,
-          {
-            x: startX,
+        gsap.to(number, {
+          color: "#2a80ff",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 68%",
+            end: "bottom 48%",
+            scrub: true,
           },
-          {
-            x: endX,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".about-new-capabilities",
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.35,
-            },
-          }
-        );
+        });
       });
 
       /* =====================================================
-         CULTURE WORDS
+         RESPONSIVE INTERLACED MOTION
       ====================================================== */
 
-      gsap.fromTo(
-        ".about-new-culture-word",
+      mm.add(
         {
-          opacity: 0.15,
+          desktop: "(min-width: 1025px)",
+          tablet: "(min-width: 769px) and (max-width: 1024px)",
+          mobile: "(max-width: 768px)",
         },
-        {
-          opacity: 1,
-          stagger: 0.12,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".about-new-culture-title",
-            start: "top 78%",
-            end: "center 45%",
-            scrub: 1,
-          },
+        (context) => {
+          const { desktop, tablet, mobile } = context.conditions;
+
+          let movement = 180;
+
+          if (tablet) movement = 95;
+          if (mobile) movement = 42;
+
+          gsap.utils.toArray(".about-capability").forEach((item, index) => {
+            const startX =
+              index % 2 === 0
+                ? -movement
+                : movement;
+
+            const endX =
+              index % 2 === 0
+                ? movement
+                : -movement;
+
+            gsap.fromTo(
+              item,
+              {
+                x: startX,
+              },
+              {
+                x: endX,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: ".about-capabilities",
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: desktop ? 1.25 : 1,
+                },
+              }
+            );
+          });
         }
       );
     }, page);
 
-    return () => ctx.revert();
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, []);
 
   return (
-    <main ref={pageRef} className="about-new">
+    <main
+      ref={pageRef}
+      className="about-page"
+    >
       {/* =====================================================
           HERO
       ====================================================== */}
 
-      <section className="about-new-hero">
+      <section className="about-hero">
         <div className="container-main">
-          <div className="about-new-hero-intro">
-            <span className="about-new-label">Nosotros / RTSEC</span>
-          </div>
+          <span className="about-eyebrow about-hero-fade">
+            Nosotros
+          </span>
 
-          <h1 className="about-new-hero-title">
-            <span className="about-new-hero-line">
+          <h1 className="about-hero-title">
+            <span className="about-hero-line">
               <span>Somos técnicos.</span>
             </span>
 
-            <span className="about-new-hero-line">
+            <span className="about-hero-line">
               <span>Nos gusta resolver</span>
             </span>
 
-            <span className="about-new-hero-line about-new-hero-line-muted">
+            <span className="about-hero-line about-hero-line-muted">
               <span>problemas difíciles.</span>
             </span>
           </h1>
 
-          <div className="about-new-hero-description about-new-hero-intro">
+          <div className="about-hero-copy about-hero-fade">
             <p>
-              Diseñamos, implementamos y protegemos la infraestructura sobre la
-              que operan las empresas.
+              Diseñamos infraestructura y seguridad para que las operaciones
+              sigan funcionando.
             </p>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          PHOTO + APPROACH
+          APPROACH
       ====================================================== */}
 
-      <section className="about-new-intro">
+      <section className="about-approach">
         <div className="container-main">
-          <div className="about-new-intro-grid">
-            <div className="about-new-photo about-new-reveal">
-              <Image
-                src="/images/about-rtsec-real.jpg"
-                alt="Trabajo técnico sobre infraestructura de red"
-                width={1200}
-                height={1600}
-                sizes="(max-width: 1024px) 100vw, 68vw"
-                className="about-new-photo-image"
-              />
-
-              <span className="about-new-photo-caption">
-                Trabajo de campo / RTSEC
+          <div className="about-approach-grid">
+            <div className="about-approach-copy about-reveal">
+              <span className="about-eyebrow">
+                Cómo trabajamos
               </span>
-            </div>
-
-            <div className="about-new-intro-copy about-new-reveal">
-              <span className="about-new-label">Cómo trabajamos</span>
 
               <h2>
                 Primero entendemos.
-                <br />
-                Después diseñamos.
+                <span>
+                  Después diseñamos.
+                </span>
               </h2>
 
               <p>
-                No empezamos por un fabricante ni por un producto. Empezamos
-                entendiendo qué debe funcionar, qué necesita protegerse y qué
-                no puede fallar.
+                No empezamos por un fabricante ni por un producto. Empezamos por
+                entender qué debe funcionar, qué necesita protegerse y qué no
+                puede fallar.
               </p>
+            </div>
+
+            <div className="about-approach-media about-reveal">
+              <div className="about-approach-image">
+                <Image
+                  src="/images/about-rtsec-real.jpg"
+                  alt="Infraestructura de red y trabajo técnico de RTSEC"
+                  width={1200}
+                  height={1600}
+                  sizes="(max-width: 768px) 88vw, (max-width: 1024px) 48vw, 42vw"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -279,25 +305,28 @@ export default function AboutPage() {
           PROCESS
       ====================================================== */}
 
-      <section className="about-new-process">
+      <section className="about-process">
         <div className="container-main">
-          <div className="about-new-process-head about-new-reveal">
-            <span className="about-new-label">Nuestra forma de trabajar</span>
+          <div className="about-process-heading about-reveal">
+            <span className="about-eyebrow">
+              Nuestro proceso
+            </span>
 
             <h2>
-              Menos discurso.
-              <br />
-              Más criterio.
+              Cuatro fases.
+              <span>
+                Un solo objetivo: que funcione.
+              </span>
             </h2>
           </div>
 
-          <div className="about-new-process-list">
+          <div className="about-process-grid">
             {process.map((item) => (
               <article
-                className="about-new-process-item"
                 key={item.number}
+                className="about-process-item"
               >
-                <span className="about-new-process-number">
+                <span className="about-process-number">
                   {item.number}
                 </span>
 
@@ -311,24 +340,25 @@ export default function AboutPage() {
       </section>
 
       {/* =====================================================
-          INTERLACED CAPABILITIES
+          INTERLACED MOTION
       ====================================================== */}
 
-      <section className="about-new-capabilities">
-        <div className="about-new-capabilities-sticky">
-          <div className="about-new-capabilities-heading">
-            <span className="about-new-label">Una visión integrada</span>
+      <section className="about-capabilities">
+        <div className="about-capabilities-sticky">
+          <div className="about-capabilities-head">
+            <span className="about-eyebrow">
+              Una visión integrada
+            </span>
 
             <p>
-              La infraestructura, la conectividad y la seguridad no funcionan
-              por separado.
+              Nada funciona aislado.
             </p>
           </div>
 
-          <div className="about-new-capabilities-list">
+          <div className="about-capabilities-list">
             {capabilities.map((item) => (
               <div
-                className="about-new-capability"
+                className="about-capability"
                 key={item}
               >
                 {item}
@@ -336,68 +366,41 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <div className="about-new-capabilities-footer">
+          <div className="about-capabilities-end">
             <h2>
-              Todo está conectado.
-              <span>Nosotros diseñamos cómo.</span>
-            </h2>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          CULTURE
-      ====================================================== */}
-
-      <section className="about-new-culture">
-        <div className="container-main">
-          <div className="about-new-culture-head about-new-reveal">
-            <span className="about-new-label">Cultura técnica</span>
-          </div>
-
-          <h2 className="about-new-culture-title">
-            <span className="about-new-culture-word">Probamos.</span>
-            <span className="about-new-culture-word">Rompemos.</span>
-            <span className="about-new-culture-word">Entendemos.</span>
-            <span className="about-new-culture-word">Documentamos.</span>
-            <span className="about-new-culture-word">
-              Volvemos a probar.
-            </span>
-          </h2>
-
-          <div className="about-new-culture-footer about-new-reveal">
-            <div className="about-new-culture-line" />
-
-            <div className="about-new-culture-copy">
-              <p>
-                Buena parte de lo que sabemos nace del laboratorio, del campo y
-                de enfrentarnos a problemas reales.
-              </p>
-
-              <p>
-                Cuando algo falla, no buscamos únicamente que vuelva a
-                funcionar. Buscamos entender por qué ocurrió.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          STATEMENT
-      ====================================================== */}
-
-      <section className="about-new-statement">
-        <div className="container-main">
-          <div className="about-new-statement-inner about-new-reveal">
-            <span className="about-new-label">RTSEC Perú</span>
-
-            <h2>
-              Somos una empresa joven.
+              Nada funciona aislado.
               <span>
-                La experiencia técnica con la que trabajamos no empezó ayer.
+                Diseñamos cada componente pensando en el sistema completo.
               </span>
             </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          COMPANY
+      ====================================================== */}
+
+      <section className="about-company">
+        <div className="container-main">
+          <div className="about-company-inner about-reveal">
+            <div className="about-company-meta">
+              <span>RTSEC / Perú</span>
+              <span>Equipo técnico</span>
+            </div>
+
+            <div className="about-company-grid">
+              <h2>
+                Somos una
+                <br />
+                empresa joven.
+              </h2>
+
+              <p>
+                El conocimiento con el que trabajamos se construyó mucho antes
+                que nuestro nombre.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -406,17 +409,24 @@ export default function AboutPage() {
           CTA
       ====================================================== */}
 
-      <section className="about-new-cta">
+      <section className="about-cta">
         <div className="container-main">
-          <div className="about-new-cta-inner about-new-reveal">
-            <span className="about-new-label">Hablemos</span>
+          <div className="about-cta-inner about-reveal">
+            <span className="about-eyebrow">
+              Hablemos
+            </span>
 
-            <div className="about-new-cta-content">
-              <h2>¿Tienes un reto técnico?</h2>
+            <div className="about-cta-content">
+              <h2>
+                ¿Tienes un reto técnico?
+              </h2>
 
-              <Link href="/contacto" className="about-new-cta-link">
+              <Link
+                href="/contacto"
+                className="about-cta-link"
+              >
                 <span>Cuéntanoslo</span>
-                <span className="about-new-cta-arrow">↗</span>
+                <span>↗</span>
               </Link>
             </div>
           </div>
