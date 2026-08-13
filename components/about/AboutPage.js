@@ -35,11 +35,9 @@ const process = [
 
 export default function AboutPage() {
   const pageRef = useRef(null);
-  const closingRef = useRef(null);
 
   useEffect(() => {
     const page = pageRef.current;
-    const closing = closingRef.current;
 
     if (!page) return;
 
@@ -79,7 +77,7 @@ export default function AboutPage() {
       );
 
       /* =====================================================
-         REVEALS
+         GENERIC REVEALS
       ====================================================== */
 
       gsap.utils.toArray(".about-reveal").forEach((element) => {
@@ -128,6 +126,7 @@ export default function AboutPage() {
 
       /* =====================================================
          MISSION / VISION
+         RESTAURAMOS LA ANIMACIÓN ORIGINAL
       ====================================================== */
 
       gsap.fromTo(
@@ -141,9 +140,9 @@ export default function AboutPage() {
           ease: "none",
           scrollTrigger: {
             trigger: ".about-direction",
-            start: "top 76%",
-            end: "bottom 45%",
-            scrub: 1,
+            start: "top 78%",
+            end: "bottom 48%",
+            scrub: 0.8,
           },
         }
       );
@@ -158,9 +157,9 @@ export default function AboutPage() {
           ease: "none",
           scrollTrigger: {
             trigger: ".about-direction",
-            start: "top 76%",
-            end: "bottom 45%",
-            scrub: 1,
+            start: "top 78%",
+            end: "bottom 48%",
+            scrub: 0.8,
           },
         }
       );
@@ -170,6 +169,10 @@ export default function AboutPage() {
         .forEach((panel, index) => {
           const marker = panel.querySelector(
             ".about-direction-panel-marker"
+          );
+
+          const label = panel.querySelector(
+            ".about-direction-panel-label"
           );
 
           const title = panel.querySelector(
@@ -184,13 +187,13 @@ export default function AboutPage() {
             panel,
             {
               opacity: 0,
-              y: 28,
+              y: 38,
             },
             {
               opacity: 1,
               y: 0,
-              duration: 0.85,
-              delay: index * 0.08,
+              duration: 1,
+              delay: index * 0.09,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: panel,
@@ -208,7 +211,26 @@ export default function AboutPage() {
             },
             {
               scaleX: 1,
-              duration: 0.8,
+              duration: 0.85,
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: panel,
+                start: "top 80%",
+                once: true,
+              },
+            }
+          );
+
+          gsap.fromTo(
+            label,
+            {
+              opacity: 0.35,
+              x: -8,
+            },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.65,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: panel,
@@ -221,7 +243,7 @@ export default function AboutPage() {
           gsap.fromTo(
             title,
             {
-              color: "#738096",
+              color: "#68758b",
             },
             {
               color: "#f4f6f9",
@@ -229,8 +251,8 @@ export default function AboutPage() {
               scrollTrigger: {
                 trigger: panel,
                 start: "top 70%",
-                end: "center 50%",
-                scrub: 0.7,
+                end: "center 48%",
+                scrub: 0.8,
               },
             }
           );
@@ -238,16 +260,18 @@ export default function AboutPage() {
           gsap.fromTo(
             body,
             {
-              opacity: 0.55,
+              opacity: 0.42,
+              y: 8,
             },
             {
               opacity: 1,
+              y: 0,
               ease: "none",
               scrollTrigger: {
                 trigger: panel,
-                start: "top 72%",
-                end: "center 50%",
-                scrub: 0.7,
+                start: "top 71%",
+                end: "center 49%",
+                scrub: 0.8,
               },
             }
           );
@@ -305,8 +329,8 @@ export default function AboutPage() {
           .timeline({
             scrollTrigger: {
               trigger: item,
-              start: "top 68%",
-              end: "bottom 44%",
+              start: "top 69%",
+              end: "bottom 42%",
               toggleActions: "play reverse play reverse",
             },
           })
@@ -322,9 +346,10 @@ export default function AboutPage() {
           .to(
             number,
             {
-              color: "#398cff",
+              color: "#438fff",
+              textShadow:
+                "0 0 24px rgba(42,128,255,.22)",
               duration: 0.4,
-              ease: "power2.out",
             },
             0
           )
@@ -350,7 +375,7 @@ export default function AboutPage() {
           mobile: "(max-width: 768px)",
         },
         (context) => {
-          const { desktop, tablet, mobile } = context.conditions;
+          const { tablet, mobile } = context.conditions;
 
           let travel = 7;
 
@@ -405,144 +430,94 @@ export default function AboutPage() {
                 }
               );
             });
-
-          /* ===============================================
-             POINTER DEPTH — DESKTOP ONLY
-          ================================================ */
-
-          if (desktop && closing) {
-            const handlePointerMove = (event) => {
-              const rect = closing.getBoundingClientRect();
-
-              const px =
-                ((event.clientX - rect.left) / rect.width) * 100;
-
-              const py =
-                ((event.clientY - rect.top) / rect.height) * 100;
-
-              closing.style.setProperty(
-                "--closing-pointer-x",
-                `${px}%`
-              );
-
-              closing.style.setProperty(
-                "--closing-pointer-y",
-                `${py}%`
-              );
-            };
-
-            const handlePointerLeave = () => {
-              closing.style.setProperty(
-                "--closing-pointer-x",
-                "72%"
-              );
-
-              closing.style.setProperty(
-                "--closing-pointer-y",
-                "48%"
-              );
-            };
-
-            closing.addEventListener(
-              "pointermove",
-              handlePointerMove
-            );
-
-            closing.addEventListener(
-              "pointerleave",
-              handlePointerLeave
-            );
-
-            return () => {
-              closing.removeEventListener(
-                "pointermove",
-                handlePointerMove
-              );
-
-              closing.removeEventListener(
-                "pointerleave",
-                handlePointerLeave
-              );
-            };
-          }
         }
       );
 
       /* =====================================================
-         COMPANY → CLOSING TRANSITION
+         COMPANY
       ====================================================== */
 
       gsap.fromTo(
-        ".about-company-transition-energy",
-        {
-          scaleX: 0.15,
-          opacity: 0,
-        },
-        {
-          scaleX: 1,
-          opacity: 0.65,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".about-company",
-            start: "bottom 85%",
-            end: "bottom 25%",
-            scrub: 1,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".about-company-transition-glow",
+        ".about-company-inner",
         {
           opacity: 0,
-          scale: 0.8,
+          y: 30,
         },
         {
           opacity: 1,
-          scale: 1.12,
-          ease: "none",
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".about-company",
-            start: "bottom 90%",
-            end: "bottom 20%",
-            scrub: 1,
+            start: "top 86%",
+            once: true,
           },
         }
       );
 
       /* =====================================================
-         CLOSING SYSTEM APPEARANCE
+         COMPANY → CTA FLUID BRIDGE
       ====================================================== */
 
       gsap.fromTo(
-        ".about-closing-system",
+        ".about-transition-light",
         {
+          yPercent: -25,
           opacity: 0,
-          scale: 0.88,
+          scale: 0.85,
         },
         {
-          opacity: 0.78,
+          yPercent: 18,
+          opacity: 1,
           scale: 1,
           ease: "none",
           scrollTrigger: {
-            trigger: ".about-company",
-            start: "bottom 72%",
-            end: ".about-closing top 12%",
-            scrub: 1.15,
+            trigger: ".about-company-closing",
+            start: "top 75%",
+            end: "bottom 45%",
+            scrub: 1.2,
           },
         }
       );
 
       gsap.fromTo(
-        ".about-closing-copy",
+        ".about-transition-haze",
+        {
+          yPercent: -15,
+          opacity: 0.15,
+        },
+        {
+          yPercent: 18,
+          opacity: 0.9,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".about-company-closing",
+            start: "top 78%",
+            end: "bottom 40%",
+            scrub: 1,
+          },
+        }
+      );
+
+      /* =====================================================
+         CTA
+      ====================================================== */
+
+      gsap.fromTo(
+        ".about-cta-eyebrow, .about-cta-title, .about-cta-copy",
         {
           opacity: 0,
+          y: 30,
         },
         {
           opacity: 1,
-          duration: 0.4,
+          y: 0,
+          duration: 0.9,
+          stagger: 0.08,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: ".about-closing",
+            trigger: ".about-cta",
             start: "top 82%",
             once: true,
           },
@@ -550,97 +525,19 @@ export default function AboutPage() {
       );
 
       gsap.fromTo(
-        ".about-closing-intro",
+        ".about-cta-action",
         {
           opacity: 0,
-          y: 24,
+          x: 28,
         },
         {
           opacity: 1,
-          y: 0,
-          duration: 0.85,
+          x: 0,
+          duration: 0.9,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".about-closing",
-            start: "top 72%",
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".about-closing-title-mask h2",
-        {
-          yPercent: 112,
-          rotate: 1.5,
-        },
-        {
-          yPercent: 0,
-          rotate: 0,
-          duration: 1.15,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: ".about-closing",
-            start: "top 68%",
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".about-closing-link",
-        {
-          opacity: 0,
-          y: 22,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.16,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".about-closing",
-            start: "top 66%",
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".about-closing-top",
-        {
-          opacity: 0,
-          y: 14,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".about-closing",
+            trigger: ".about-cta",
             start: "top 78%",
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".about-closing-footer > span",
-        {
-          opacity: 0,
-          y: 12,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.07,
-          duration: 0.55,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".about-closing-footer",
-            start: "top 92%",
             once: true,
           },
         }
@@ -656,10 +553,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main
-      ref={pageRef}
-      className="about-page"
-    >
+    <main ref={pageRef} className="about-page">
       {/* =====================================================
           HERO
       ====================================================== */}
@@ -711,9 +605,7 @@ export default function AboutPage() {
 
               <h2>
                 Primero entendemos.
-                <span>
-                  Después diseñamos.
-                </span>
+                <span>Después diseñamos.</span>
               </h2>
 
               <p>
@@ -740,6 +632,7 @@ export default function AboutPage() {
 
       {/* =====================================================
           MISSION / VISION
+          ESTRUCTURA ORIGINAL + TEXTO NUEVO
       ====================================================== */}
 
       <section className="about-direction">
@@ -769,9 +662,8 @@ export default function AboutPage() {
             <article className="about-direction-panel">
               <span className="about-direction-panel-marker" />
 
-              <div className="about-direction-panel-top">
-                <span>01</span>
-                <span>Misión</span>
+              <div className="about-direction-panel-label">
+                Misión
               </div>
 
               <h2 className="about-direction-panel-title">
@@ -781,28 +673,30 @@ export default function AboutPage() {
               </h2>
 
               <p className="about-direction-panel-text">
-                Diseñamos y protegemos entornos tecnológicos pensando
-                en la operación real.
+                Convertimos necesidades reales en infraestructura y
+                seguridad que respondan cuando más importa. Diseñamos
+                con criterio, implementamos con orden y pensamos siempre
+                en la operación.
               </p>
             </article>
 
             <article className="about-direction-panel">
               <span className="about-direction-panel-marker" />
 
-              <div className="about-direction-panel-top">
-                <span>02</span>
-                <span>Visión</span>
+              <div className="about-direction-panel-label">
+                Visión
               </div>
 
               <h2 className="about-direction-panel-title">
-                Elevar el estándar
+                Hacer bien
                 <br />
-                con cada proyecto.
+                lo difícil.
               </h2>
 
               <p className="about-direction-panel-text">
-                Crecer por conocimiento, criterio técnico y resultados
-                que se puedan sostener.
+                Queremos crecer por la calidad de lo que hacemos:
+                conocimiento, cercanía y soluciones que sigan teniendo
+                sentido mucho después de la implementación.
               </p>
             </article>
           </div>
@@ -822,9 +716,7 @@ export default function AboutPage() {
 
             <h2>
               Cuatro fases.
-              <span>
-                Un solo objetivo: que funcione.
-              </span>
+              <span>Un solo objetivo: que funcione.</span>
             </h2>
           </div>
 
@@ -842,13 +734,9 @@ export default function AboutPage() {
                 </span>
 
                 <div className="about-process-copy">
-                  <h3>
-                    {item.title}
-                  </h3>
+                  <h3>{item.title}</h3>
 
-                  <p>
-                    {item.text}
-                  </p>
+                  <p>{item.text}</p>
                 </div>
               </article>
             ))}
@@ -893,291 +781,84 @@ export default function AboutPage() {
       </section>
 
       {/* =====================================================
-          COMPANY
+          COMPANY + CTA
+          AHORA SON UNA SOLA EXPERIENCIA VISUAL
       ====================================================== */}
 
-      <section className="about-company">
-        <div className="container-main">
-          <div className="about-company-inner about-reveal">
-            <div className="about-company-meta">
-              <span>
-                RTSEC / Perú
-              </span>
-
-              <span>
-                Equipo técnico
-              </span>
-            </div>
-
-            <div className="about-company-grid">
-              <h2>
-                Somos una
-                <br />
-                empresa joven.
-              </h2>
-
-              <p>
-                El conocimiento con el que trabajamos se construyó mucho
-                antes que nuestro nombre.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="about-company-transition"
+      <div className="about-company-closing">
+        <span
+          className="about-transition-haze"
           aria-hidden="true"
-        >
-          <span className="about-company-transition-glow" />
-          <span className="about-company-transition-energy" />
-        </div>
-      </section>
+        />
 
-      {/* =====================================================
-          CLOSING EXPERIENCE
-      ====================================================== */}
-
-      <section
-        ref={closingRef}
-        className="about-closing"
-      >
-        <div
-          className="about-closing-ambient"
+        <span
+          className="about-transition-light"
           aria-hidden="true"
-        >
-          <div className="about-closing-grid" />
+        />
 
-          <div className="about-closing-beam about-closing-beam-a" />
-          <div className="about-closing-beam about-closing-beam-b" />
-
-          <span className="about-closing-glow" />
-
-          <svg
-            className="about-closing-system"
-            viewBox="0 0 1400 900"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            {/* RINGS */}
-
-            <circle
-              cx="965"
-              cy="460"
-              r="315"
-              className="closing-ring closing-ring-01"
-            />
-
-            <circle
-              cx="965"
-              cy="460"
-              r="226"
-              className="closing-ring closing-ring-02"
-            />
-
-            <circle
-              cx="965"
-              cy="460"
-              r="118"
-              className="closing-ring closing-ring-03"
-            />
-
-            {/* ORBITS */}
-
-            <ellipse
-              cx="965"
-              cy="460"
-              rx="450"
-              ry="170"
-              className="closing-orbit closing-orbit-a"
-            />
-
-            <ellipse
-              cx="965"
-              cy="460"
-              rx="400"
-              ry="135"
-              transform="rotate(42 965 460)"
-              className="closing-orbit closing-orbit-b"
-            />
-
-            {/* ROUTES */}
-
-            <path
-              d="M180 460H850"
-              className="closing-route"
-            />
-
-            <path
-              d="M1080 460H1325"
-              className="closing-route"
-            />
-
-            <path
-              d="M965 75V342"
-              className="closing-route"
-            />
-
-            <path
-              d="M965 578V830"
-              className="closing-route"
-            />
-
-            <path
-              d="M640 220L880 382"
-              className="closing-route closing-route-soft"
-            />
-
-            <path
-              d="M1110 538L1285 690"
-              className="closing-route closing-route-soft"
-            />
-
-            {/* NODES */}
-
-            <circle
-              cx="490"
-              cy="460"
-              r="4"
-              className="closing-node closing-node-a"
-            />
-
-            <circle
-              cx="730"
-              cy="460"
-              r="4"
-              className="closing-node closing-node-b"
-            />
-
-            <circle
-              cx="1215"
-              cy="460"
-              r="4"
-              className="closing-node closing-node-c"
-            />
-
-            <circle
-              cx="965"
-              cy="190"
-              r="4"
-              className="closing-node closing-node-d"
-            />
-
-            <circle
-              cx="965"
-              cy="730"
-              r="4"
-              className="closing-node closing-node-e"
-            />
-
-            {/* CORE */}
-
-            <circle
-              cx="965"
-              cy="460"
-              r="48"
-              className="closing-core"
-            />
-
-            <circle
-              cx="965"
-              cy="460"
-              r="13"
-              className="closing-core-dot"
-            />
-
-            <circle
-              cx="965"
-              cy="460"
-              r="13"
-              className="closing-core-pulse"
-            />
-          </svg>
-
-          <div className="about-closing-scan" />
-        </div>
-
-        <div className="container-main about-closing-container">
-          <div className="about-closing-top">
-            <span className="about-eyebrow">
-              Próximo paso
-            </span>
-
-            <div className="about-closing-system-state">
-              <span />
-              Disponible para nuevos proyectos
-            </div>
-          </div>
-
-          <div className="about-closing-main">
-            <div className="about-closing-copy">
-              <p className="about-closing-intro">
-                Si hay algo que mejorar,
-                <br />
-                proteger o rediseñar,
-                <br />
-                queremos entenderlo.
-              </p>
-
-              <div className="about-closing-title-mask">
-                <h2>
-                  Hablemos.
-                </h2>
+        <section className="about-company">
+          <div className="container-main">
+            <div className="about-company-inner">
+              <div className="about-company-meta">
+                <span>RTSEC / Perú</span>
+                <span>Equipo técnico</span>
               </div>
 
-              <Link
-                href="/contacto"
-                className="about-closing-link"
-              >
-                <span>
-                  Cuéntanos qué necesitas
-                </span>
+              <div className="about-company-grid">
+                <h2>
+                  Somos una
+                  <br />
+                  empresa joven.
+                </h2>
 
-                <span className="about-closing-link-arrow">
-                  ↗
-                </span>
-
-                <span className="about-closing-link-track">
-                  <i />
-                </span>
-              </Link>
-            </div>
-
-            <div
-              className="about-closing-side"
-              aria-hidden="true"
-            >
-              <span className="about-closing-side-number">
-                04
-              </span>
-
-              <span>
-                RTSEC / SYSTEM
-              </span>
+                <p>
+                  El conocimiento con el que trabajamos se construyó
+                  mucho antes que nuestro nombre.
+                </p>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div className="about-closing-footer">
-            <span>
-              Ciberseguridad
-            </span>
+        <section className="about-cta">
+          <div className="container-main">
+            <div className="about-cta-layout">
+              <div className="about-cta-content">
+                <span className="about-eyebrow about-cta-eyebrow">
+                  El siguiente paso
+                </span>
 
-            <span>
-              Infraestructura
-            </span>
+                <h2 className="about-cta-title">
+                  ¿Lo vemos
+                  <span>juntos?</span>
+                </h2>
 
-            <span>
-              Conectividad
-            </span>
+                <p className="about-cta-copy">
+                  Cuéntanos qué tienes entre manos.
+                  <br />
+                  Lo entendemos contigo.
+                </p>
+              </div>
 
-            <span>
-              Continuidad
-            </span>
+              <div className="about-cta-action">
+                <Link href="/contacto" className="about-cta-button">
+                  <span>Hablemos</span>
 
-            <span className="about-closing-footer-location">
-              Lima · Perú
-            </span>
+                  <span className="about-cta-button-icon">
+                    ↗
+                  </span>
+
+                  <span className="about-cta-button-line" />
+                </Link>
+
+                <span className="about-cta-note">
+                  Conversación inicial · sin compromiso
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }
