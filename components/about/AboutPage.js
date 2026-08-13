@@ -6,6 +6,8 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import AboutHeroBlueprint from "./AboutHeroBlueprint";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const process = [
@@ -31,25 +33,17 @@ const process = [
   },
 ];
 
-const capabilities = [
-  "Seguridad",
-  "Infraestructura",
-  "Conectividad",
-  "Continuidad",
-];
-
 export default function AboutPage() {
   const pageRef = useRef(null);
 
   useEffect(() => {
     const page = pageRef.current;
-    if (!page) return;
 
-    const mm = gsap.matchMedia();
+    if (!page) return;
 
     const ctx = gsap.context(() => {
       /* =====================================================
-         HERO
+         HERO TEXT
       ====================================================== */
 
       gsap.fromTo(
@@ -59,8 +53,8 @@ export default function AboutPage() {
         },
         {
           yPercent: 0,
-          duration: 1.1,
-          stagger: 0.08,
+          duration: 1.05,
+          stagger: 0.075,
           ease: "power4.out",
         }
       );
@@ -75,7 +69,7 @@ export default function AboutPage() {
           opacity: 1,
           y: 0,
           duration: 0.85,
-          delay: 0.45,
+          delay: 0.3,
           ease: "power3.out",
         }
       );
@@ -84,46 +78,48 @@ export default function AboutPage() {
          GENERIC REVEALS
       ====================================================== */
 
-      gsap.utils.toArray(".about-reveal").forEach((element) => {
-        gsap.fromTo(
-          element,
-          {
-            opacity: 0,
-            y: 40,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.95,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: element,
-              start: "top 86%",
-              once: true,
+      gsap.utils
+        .toArray(".about-reveal")
+        .forEach((element) => {
+          gsap.fromTo(
+            element,
+            {
+              opacity: 0,
+              y: 38,
             },
-          }
-        );
-      });
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.9,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: element,
+                start: "top 88%",
+                once: true,
+              },
+            }
+          );
+        });
 
       /* =====================================================
-         PHOTO PARALLAX
+         IMAGE
       ====================================================== */
 
       gsap.fromTo(
         ".about-approach-image img",
         {
-          scale: 1.06,
-          yPercent: -2,
+          scale: 1.055,
+          yPercent: -1.5,
         },
         {
           scale: 1,
-          yPercent: 2,
+          yPercent: 1.5,
           ease: "none",
           scrollTrigger: {
-            trigger: ".about-approach-media",
+            trigger: ".about-approach-image",
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.1,
+            scrub: 1,
           },
         }
       );
@@ -133,16 +129,35 @@ export default function AboutPage() {
       ====================================================== */
 
       gsap.fromTo(
-        ".about-process-item",
+        ".about-process-heading",
         {
           opacity: 0,
-          y: 34,
+          y: 32,
         },
         {
           opacity: 1,
           y: 0,
+          duration: 0.95,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-process-heading",
+            start: "top 84%",
+            once: true,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".about-process-item",
+        {
+          opacity: 0,
+          y: 28,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.09,
           duration: 0.8,
-          stagger: 0.11,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".about-process-grid",
@@ -152,72 +167,96 @@ export default function AboutPage() {
         }
       );
 
-      gsap.utils.toArray(".about-process-item").forEach((item) => {
-        const number = item.querySelector(".about-process-number");
-
-        gsap.to(number, {
-          color: "#2a80ff",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 68%",
-            end: "bottom 48%",
-            scrub: true,
-          },
-        });
-      });
-
       /* =====================================================
-         RESPONSIVE INTERLACED MOTION
+         CAPABILITIES
       ====================================================== */
+
+      const mm = gsap.matchMedia();
 
       mm.add(
         {
-          desktop: "(min-width: 1025px)",
-          tablet: "(min-width: 769px) and (max-width: 1024px)",
-          mobile: "(max-width: 768px)",
+          desktop: "(min-width:1025px)",
+          tablet:
+            "(min-width:769px) and (max-width:1024px)",
+          mobile: "(max-width:768px)",
         },
         (context) => {
-          const { desktop, tablet, mobile } = context.conditions;
+          const { tablet, mobile } =
+            context.conditions;
 
-          let movement = 180;
+          let travel = 7;
 
-          if (tablet) movement = 95;
-          if (mobile) movement = 42;
+          if (tablet) travel = 4.5;
+          if (mobile) travel = 2.7;
 
-          gsap.utils.toArray(".about-capability").forEach((item, index) => {
-            const startX =
-              index % 2 === 0
-                ? -movement
-                : movement;
+          gsap.utils
+            .toArray(".about-capability-row")
+            .forEach((row, rowIndex) => {
+              const left =
+                row.querySelector(
+                  ".about-capability-left"
+                );
 
-            const endX =
-              index % 2 === 0
-                ? movement
-                : -movement;
+              const right =
+                row.querySelector(
+                  ".about-capability-right"
+                );
 
-            gsap.fromTo(
-              item,
-              {
-                x: startX,
-              },
-              {
-                x: endX,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: ".about-capabilities",
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: desktop ? 1.25 : 1,
+              const multiplier =
+                rowIndex === 0 ? 1 : 0.88;
+
+              const distance =
+                travel * multiplier;
+
+              gsap.fromTo(
+                left,
+                {
+                  x: `-${distance}vw`,
                 },
-              }
-            );
-          });
+                {
+                  x: `${distance * 0.55}vw`,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger:
+                      ".about-capabilities",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: mobile
+                      ? 0.7
+                      : 1,
+                  },
+                }
+              );
+
+              gsap.fromTo(
+                right,
+                {
+                  x: `${distance}vw`,
+                },
+                {
+                  x: `-${distance * 0.55}vw`,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger:
+                      ".about-capabilities",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: mobile
+                      ? 0.7
+                      : 1,
+                  },
+                }
+              );
+            });
         }
       );
+
+      return () => mm.revert();
     }, page);
 
+    ScrollTrigger.refresh();
+
     return () => {
-      mm.revert();
       ctx.revert();
     };
   }, []);
@@ -232,30 +271,40 @@ export default function AboutPage() {
       ====================================================== */}
 
       <section className="about-hero">
-        <div className="container-main">
-          <span className="about-eyebrow about-hero-fade">
-            Nosotros
-          </span>
+        <AboutHeroBlueprint />
 
-          <h1 className="about-hero-title">
-            <span className="about-hero-line">
-              <span>Somos técnicos.</span>
+        <div className="container-main about-hero-container">
+          <div className="about-hero-content">
+            <span className="about-eyebrow about-hero-fade">
+              Nosotros
             </span>
 
-            <span className="about-hero-line">
-              <span>Nos gusta resolver</span>
-            </span>
+            <h1 className="about-hero-title">
+              <span className="about-hero-line">
+                <span>
+                  Somos técnicos.
+                </span>
+              </span>
 
-            <span className="about-hero-line about-hero-line-muted">
-              <span>problemas difíciles.</span>
-            </span>
-          </h1>
+              <span className="about-hero-line">
+                <span>
+                  Nos gusta resolver
+                </span>
+              </span>
 
-          <div className="about-hero-copy about-hero-fade">
-            <p>
-              Diseñamos infraestructura y seguridad para que las operaciones
-              sigan funcionando.
-            </p>
+              <span className="about-hero-line about-hero-line-muted">
+                <span>
+                  problemas difíciles.
+                </span>
+              </span>
+            </h1>
+
+            <div className="about-hero-copy about-hero-fade">
+              <p>
+                Diseñamos infraestructura y seguridad para que las operaciones
+                sigan funcionando.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -274,6 +323,7 @@ export default function AboutPage() {
 
               <h2>
                 Primero entendemos.
+
                 <span>
                   Después diseñamos.
                 </span>
@@ -293,7 +343,7 @@ export default function AboutPage() {
                   alt="Infraestructura de red y trabajo técnico de RTSEC"
                   width={1200}
                   height={1600}
-                  sizes="(max-width: 768px) 88vw, (max-width: 1024px) 48vw, 42vw"
+                  sizes="(max-width:768px) 92vw, (max-width:1024px) 48vw, 42vw"
                 />
               </div>
             </div>
@@ -307,13 +357,14 @@ export default function AboutPage() {
 
       <section className="about-process">
         <div className="container-main">
-          <div className="about-process-heading about-reveal">
+          <div className="about-process-heading">
             <span className="about-eyebrow">
               Nuestro proceso
             </span>
 
             <h2>
               Cuatro fases.
+
               <span>
                 Un solo objetivo: que funcione.
               </span>
@@ -330,9 +381,13 @@ export default function AboutPage() {
                   {item.number}
                 </span>
 
-                <h3>{item.title}</h3>
+                <h3>
+                  {item.title}
+                </h3>
 
-                <p>{item.text}</p>
+                <p>
+                  {item.text}
+                </p>
               </article>
             ))}
           </div>
@@ -340,7 +395,7 @@ export default function AboutPage() {
       </section>
 
       {/* =====================================================
-          INTERLACED MOTION
+          CAPABILITIES
       ====================================================== */}
 
       <section className="about-capabilities">
@@ -349,30 +404,28 @@ export default function AboutPage() {
             <span className="about-eyebrow">
               Una visión integrada
             </span>
-
-            <p>
-              Nada funciona aislado.
-            </p>
           </div>
 
-          <div className="about-capabilities-list">
-            {capabilities.map((item) => (
-              <div
-                className="about-capability"
-                key={item}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-
-          <div className="about-capabilities-end">
-            <h2>
-              Nada funciona aislado.
-              <span>
-                Diseñamos cada componente pensando en el sistema completo.
+          <div className="about-capabilities-stage">
+            <div className="about-capability-row">
+              <span className="about-capability about-capability-left">
+                Seguridad
               </span>
-            </h2>
+
+              <span className="about-capability about-capability-right about-capability-muted">
+                Infraestructura
+              </span>
+            </div>
+
+            <div className="about-capability-row">
+              <span className="about-capability about-capability-left">
+                Conectividad
+              </span>
+
+              <span className="about-capability about-capability-right about-capability-muted">
+                Continuidad
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -385,8 +438,13 @@ export default function AboutPage() {
         <div className="container-main">
           <div className="about-company-inner about-reveal">
             <div className="about-company-meta">
-              <span>RTSEC / Perú</span>
-              <span>Equipo técnico</span>
+              <span>
+                RTSEC / Perú
+              </span>
+
+              <span>
+                Equipo técnico
+              </span>
             </div>
 
             <div className="about-company-grid">
@@ -425,8 +483,13 @@ export default function AboutPage() {
                 href="/contacto"
                 className="about-cta-link"
               >
-                <span>Cuéntanoslo</span>
-                <span>↗</span>
+                <span>
+                  Cuéntanoslo
+                </span>
+
+                <span>
+                  ↗
+                </span>
               </Link>
             </div>
           </div>
