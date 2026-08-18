@@ -1,22 +1,34 @@
 /* =========================================================
    RTSEC — HOME HERO
-   Premium responsive hero
+   Responsive editorial composition
 ========================================================= */
 
 .hero-section {
+  --hero-header-height: 104px;
+
   position: relative;
 
-  width: 100%;
+  /*
+   * IMPORTANTE:
+   * El header ya ocupa espacio en el documento.
+   * No podemos volver a darle 100vh enteros al hero.
+   */
+  height: calc(100svh - var(--hero-header-height));
+  min-height: 660px;
 
-  height: 100svh;
-  min-height: 620px;
-
-  overflow: clip;
+  overflow: hidden;
 
   z-index: 1;
 
-  background: #030508;
+  background: #03060b;
 }
+
+.hero-section *,
+.hero-section *::before,
+.hero-section *::after {
+  box-sizing: border-box;
+}
+
 
 /* =========================================================
    BACKGROUND
@@ -35,6 +47,7 @@
     opacity;
 }
 
+
 .hero-bg-image {
   position: absolute;
 
@@ -52,47 +65,78 @@
     saturate(0.88);
 }
 
+
+/* =========================================================
+   VIGNETTE
+========================================================= */
+
 .hero-vignette {
   position: absolute;
 
   inset: 0;
 
-  opacity: 0.82;
-
   background:
+
+    /*
+     * Oscurecimiento superior:
+     * genera continuidad con el header.
+     */
     linear-gradient(
       180deg,
-      rgba(5, 7, 10, 0.4) 0%,
-      rgba(5, 7, 10, 0.5) 32%,
-      rgba(5, 7, 10, 0.62) 62%,
-      rgba(5, 7, 10, 0.84) 100%
+      rgba(5, 7, 10, 0.52) 0%,
+      rgba(5, 7, 10, 0.31) 20%,
+      rgba(5, 7, 10, 0.23) 47%,
+      rgba(5, 7, 10, 0.45) 75%,
+      rgba(5, 7, 10, 0.76) 100%
+    ),
+
+    /*
+     * Hace más legible exclusivamente
+     * el centro del hero.
+     */
+    radial-gradient(
+      ellipse at 50% 57%,
+      rgba(4, 8, 15, 0.08) 0%,
+      rgba(4, 8, 15, 0.18) 48%,
+      rgba(4, 8, 15, 0.48) 100%
     );
+
+  opacity: 0.82;
 
   will-change:
     opacity,
     filter;
 }
 
+
+/* =========================================================
+   SUBTLE BLUE DEPTH
+========================================================= */
+
 .hero-grid-glow {
   position: absolute;
 
   inset: 0;
 
-  opacity: 0.42;
-
   background:
+
     radial-gradient(
-      circle at 50% 48%,
-      rgba(59, 130, 246, 0.1),
-      transparent 25%
+      ellipse at 50% 58%,
+      rgba(59, 130, 246, 0.105),
+      transparent 34%
     ),
+
     radial-gradient(
-      circle at 50% 0%,
-      rgba(59, 130, 246, 0.05),
-      transparent 31%
+      circle at 50% 10%,
+      rgba(59, 130, 246, 0.035),
+      transparent 34%
     );
 
   mix-blend-mode: screen;
+
+  opacity: 0.42;
+
+  pointer-events: none;
 
   will-change:
     transform,
@@ -100,8 +144,9 @@
     filter;
 }
 
+
 /* =========================================================
-   CONTENT
+   CONTENT STAGE
 ========================================================= */
 
 .hero-content-wrap {
@@ -112,107 +157,162 @@
   width: 100%;
   height: 100%;
 
-  min-height: inherit;
+  display: grid;
+
+  place-items: center;
+
+  /*
+   * Pequeño ajuste óptico.
+   *
+   * No desplazamos brutalmente el contenido.
+   * Sólo compensamos la percepción visual de
+   * la fotografía y la masa tipográfica.
+   */
+  padding:
+    clamp(50px, 6vh, 82px)
+    0
+    clamp(48px, 6vh, 76px);
+}
+
+
+/* =========================================================
+   HEADING GROUP
+========================================================= */
+
+.hero-heading-group {
+  width: min(100%, 1180px);
+
+  margin-inline: auto;
 
   display: flex;
 
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 
-  padding:
-    clamp(110px, 12vh, 150px)
-    0
-    clamp(54px, 7vh, 88px);
+  align-items: center;
 
   text-align: center;
-}
 
-.hero-heading-group {
-  width: 100%;
-
-  max-width:
-    min(1180px, 92vw);
-
-  margin: 0 auto;
+  transform: translateY(1.5vh);
 
   will-change:
     transform,
     opacity;
 }
 
+
 /* =========================================================
    KICKER
 ========================================================= */
 
 .hero-kicker {
-  max-width: 100%;
-
   margin:
     0
-    auto
-    clamp(14px, 1.8vh, 20px);
+    0
+    clamp(22px, 2.6vh, 32px);
 
   color:
-    rgba(255, 255, 255, 0.7);
+    rgba(226, 232, 240, 0.74);
 
   font-size:
-    clamp(10px, 0.82vw, 13px);
+    clamp(10px, 0.72vw, 13px);
 
   font-weight: 500;
 
-  line-height: 1.45;
+  line-height: 1.4;
 
-  letter-spacing: 0.22em;
+  letter-spacing: 0.23em;
 
   text-transform: uppercase;
+
+  white-space: nowrap;
 }
 
+
 /* =========================================================
-   TITLE
+   MAIN TITLE
 ========================================================= */
 
 .hero-title {
-  margin: 0;
+  width: 100%;
+
+  max-width: 1160px;
+
+  margin: 0 auto;
 
   display: flex;
 
   flex-direction: column;
+
   align-items: center;
 
-  gap: 0.015em;
+  /*
+   * El tamaño no depende únicamente del ancho.
+   *
+   * vh evita títulos gigantes en laptops
+   * 1366x768 / 1440x900.
+   */
+  font-size:
+    clamp(
+      48px,
+      min(5.65vw, 8.15vh),
+      90px
+    );
+
+  font-weight: 720;
+
+  /*
+   * Antes estaba en .92.
+   * Esto era demasiado apretado.
+   */
+  line-height: 0.985;
+
+  letter-spacing: -0.058em;
 
   color: #f8fafc;
 
-  font-size:
-    clamp(48px, 6.75vw, 106px);
+  text-wrap: balance;
 
-  font-weight: 790;
-
-  line-height: 0.89;
-
-  letter-spacing: -0.067em;
+  font-kerning: normal;
 }
+
+
+/* =========================================================
+   LINE MASK
+========================================================= */
 
 .hero-line-wrap {
   display: block;
 
-  max-width: 100%;
-
+  /*
+   * Seguimos necesitando hidden para
+   * tu animación GSAP.
+   */
   overflow: hidden;
+
+  /*
+   * Evita cortar descendentes/acentos/glifos
+   * cuando la línea está muy próxima a otra.
+   */
+  padding:
+    0.035em
+    0.04em
+    0.075em;
+
+  margin:
+    -0.035em
+    -0.04em
+    -0.075em;
 }
+
 
 .hero-line {
   display: block;
 
-  white-space: nowrap;
-
   color: #f8fafc;
 
   text-shadow:
-    0 0 8px
-    rgba(255, 255, 255, 0.025),
-    0 10px 24px
-    rgba(0, 0, 0, 0.18);
+    0 1px 1px rgba(0, 0, 0, 0.08),
+    0 12px 32px rgba(0, 0, 0, 0.22);
 
   will-change:
     transform,
@@ -220,15 +320,19 @@
     filter;
 }
 
+
+/* =========================================================
+   ACCENT
+========================================================= */
+
 .hero-line-accent {
   color: #bcd3ff;
 
   text-shadow:
-    0 0 16px
-    rgba(147, 197, 253, 0.11),
-    0 10px 26px
-    rgba(0, 0, 0, 0.2);
+    0 0 20px rgba(111, 163, 255, 0.08),
+    0 14px 32px rgba(0, 0, 0, 0.23);
 }
+
 
 /* =========================================================
    SUBTITLE
@@ -236,234 +340,284 @@
 
 .hero-subtitle {
   margin:
-    clamp(20px, 3vh, 30px)
+    clamp(25px, 3vh, 36px)
     auto
     0;
 
-  max-width: 760px;
+  max-width: 720px;
 
   color:
-    rgba(255, 255, 255, 0.87);
+    rgba(241, 245, 249, 0.84);
 
   font-size:
-    clamp(16px, 1.45vw, 24px);
+    clamp(15px, 1.15vw, 20px);
 
-  line-height: 1.45;
+  font-weight: 450;
 
-  letter-spacing: -0.015em;
+  line-height: 1.55;
+
+  letter-spacing: -0.018em;
 }
 
+
 /* =========================================================
-   DESKTOP — NORMAL
-   1500px+
+   LARGE DESKTOP
+   1600px+
 ========================================================= */
 
-@media (min-width: 1501px) {
+@media (min-width: 1600px) {
 
   .hero-heading-group {
-    max-width:
-      min(1180px, 90vw);
+    max-width: 1240px;
   }
 
   .hero-title {
+    max-width: 1220px;
+
     font-size:
-      clamp(68px, 6.3vw, 104px);
+      clamp(
+        70px,
+        min(5.35vw, 8vh),
+        94px
+      );
   }
+
 }
 
+
 /* =========================================================
-   LAPTOP
-   MacBook / 1366 / 1440 / 1536
+   COMMON LAPTOP
+   1280 — 1500
 ========================================================= */
 
 @media
-  (min-width: 1025px)
+  (min-width: 1181px)
   and
   (max-width: 1500px) {
 
-  .hero-heading-group {
-    max-width:
-      min(1000px, 88vw);
+  .hero-section {
+    --hero-header-height: 104px;
+
+    min-height: 620px;
   }
-
-  .hero-title {
-    font-size:
-      clamp(50px, 5.7vw, 82px);
-
-    line-height: 0.9;
-
-    letter-spacing: -0.062em;
-  }
-
-  .hero-subtitle {
-    font-size:
-      clamp(16px, 1.3vw, 20px);
-  }
-}
-
-/* =========================================================
-   LAPTOP WITH LOW AVAILABLE HEIGHT
-   1366×768
-   1440×800
-   browser UI / Windows scaling
-========================================================= */
-
-@media
-  (min-width: 1025px)
-  and
-  (max-height: 850px) {
 
   .hero-content-wrap {
     padding:
-      clamp(92px, 11vh, 110px)
+      clamp(42px, 5vh, 66px)
       0
-      clamp(28px, 4vh, 44px);
+      clamp(38px, 5vh, 62px);
   }
 
   .hero-heading-group {
-    max-width:
-      min(940px, 86vw);
-  }
+    width: min(100%, 1040px);
 
-  .hero-kicker {
-    margin-bottom: 11px;
-
-    font-size: 10px;
-
-    letter-spacing: 0.19em;
+    transform: translateY(0);
   }
 
   .hero-title {
-    font-size:
-      clamp(46px, 5.35vw, 72px);
+    max-width: 1030px;
 
-    line-height: 0.9;
+    font-size:
+      clamp(
+        48px,
+        min(5.25vw, 7.4vh),
+        76px
+      );
+
+    line-height: 0.99;
+  }
+
+  .hero-kicker {
+    margin-bottom:
+      clamp(19px, 2.3vh, 26px);
+
+    font-size:
+      clamp(9px, 0.7vw, 11px);
   }
 
   .hero-subtitle {
-    margin-top: 17px;
+    margin-top:
+      clamp(21px, 2.7vh, 29px);
 
     font-size:
-      clamp(15px, 1.2vw, 18px);
+      clamp(15px, 1.15vw, 18px);
   }
+
 }
 
+
 /* =========================================================
-   VERY SHORT LAPTOP VIEWPORT
-   Example: 1366×650 usable browser area
+   SHORT LAPTOPS
+   Crucial para 1366 x 768 / similares
 ========================================================= */
 
 @media
-  (min-width: 1025px)
+  (min-width: 981px)
   and
-  (max-height: 730px) {
+  (max-height: 820px) {
 
   .hero-section {
-    min-height: 560px;
+    --hero-header-height: 92px;
+
+    min-height:
+      calc(
+        100svh -
+        var(--hero-header-height)
+      );
   }
 
   .hero-content-wrap {
     padding:
-      78px
+      30px
       0
-      22px;
+      28px;
   }
 
   .hero-heading-group {
-    max-width:
-      min(850px, 84vw);
+    transform: none;
   }
 
   .hero-kicker {
-    margin-bottom: 8px;
+    margin-bottom: 17px;
 
     font-size: 9px;
 
-    line-height: 1.35;
-
-    letter-spacing: 0.17em;
+    letter-spacing: 0.2em;
   }
 
   .hero-title {
+    max-width: 970px;
+
     font-size:
-      clamp(40px, 4.8vw, 62px);
+      clamp(
+        43px,
+        min(5vw, 7.3vh),
+        62px
+      );
 
-    line-height: 0.91;
-
-    letter-spacing: -0.057em;
+    line-height: 1;
   }
 
   .hero-subtitle {
-    margin-top: 13px;
+    margin-top: 20px;
 
-    font-size: 14px;
+    font-size: 15px;
   }
+
 }
 
+
 /* =========================================================
-   TABLET
+   TABLET / SMALL LAPTOP
 ========================================================= */
 
-@media
-  (min-width: 769px)
-  and
-  (max-width: 1024px) {
+@media (max-width: 1180px) {
 
   .hero-section {
-    height: 92svh;
+    --hero-header-height: 92px;
 
-    min-height: 680px;
-  }
+    height:
+      calc(
+        100svh -
+        var(--hero-header-height)
+      );
 
-  .hero-content-wrap {
-    min-height: 92svh;
-
-    padding:
-      105px
-      0
-      70px;
+    min-height: 600px;
   }
 
   .hero-heading-group {
-    max-width:
-      min(760px, 90vw);
-  }
+    width: min(100%, 900px);
 
-  .hero-kicker {
-    max-width: 640px;
-
-    margin:
-      0
-      auto
-      15px;
-
-    font-size: 10px;
-
-    line-height: 1.55;
-
-    letter-spacing: 0.18em;
+    transform: none;
   }
 
   .hero-title {
+    max-width: 880px;
+
     font-size:
-      clamp(44px, 7vw, 68px);
+      clamp(
+        44px,
+        min(6.4vw, 7.8vh),
+        70px
+      );
 
-    line-height: 0.93;
+    line-height: 0.99;
 
-    letter-spacing: -0.057em;
+    letter-spacing: -0.052em;
   }
 
-  .hero-line {
+}
+
+
+/* =========================================================
+   <= 980
+========================================================= */
+
+@media (max-width: 980px) {
+
+  /*
+   * En tu layout el header pasa a fixed.
+   * Tu body ya recibe 84px de padding-top.
+   */
+
+  .hero-section {
+    --hero-header-height: 0px;
+
+    height:
+      calc(
+        100svh -
+        84px
+      );
+
+    min-height: 620px;
+  }
+
+  .hero-content-wrap {
+    padding:
+      54px
+      0
+      48px;
+  }
+
+  .hero-heading-group {
+    width: min(100%, 760px);
+  }
+
+  .hero-kicker {
     white-space: normal;
+
+    max-width: 660px;
+
+    margin-bottom: 22px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+  .hero-title {
+    max-width: 760px;
+
+    font-size:
+      clamp(
+        40px,
+        min(7.5vw, 7.6vh),
+        62px
+      );
+
+    line-height: 1;
+
+    letter-spacing: -0.05em;
   }
 
   .hero-subtitle {
-    margin-top: 21px;
+    margin-top: 24px;
 
-    font-size:
-      clamp(16px, 2vw, 18px);
+    font-size: 16px;
   }
+
 }
+
 
 /* =========================================================
    MOBILE
@@ -472,150 +626,198 @@
 @media (max-width: 768px) {
 
   .hero-section {
-    height: auto;
+    height:
+      calc(
+        100svh -
+        76px
+      );
 
-    min-height: 92svh;
+    min-height: 600px;
   }
 
   .hero-content-wrap {
-    min-height: 92svh;
-
     padding:
-      108px
+      48px
       0
-      60px;
+      42px;
   }
 
   .hero-heading-group {
-    max-width:
-      calc(100vw - 36px);
+    width: 100%;
+
+    max-width: 600px;
   }
 
   .hero-kicker {
-    max-width: 340px;
+    width: min(94%, 480px);
 
-    margin:
-      0
-      auto
-      16px;
+    margin-bottom: 20px;
 
     font-size: 9px;
 
-    line-height: 1.6;
+    letter-spacing: 0.16em;
+  }
+
+  .hero-title {
+    width: 100%;
+
+    max-width: 610px;
+
+    font-size:
+      clamp(
+        35px,
+        8.7vw,
+        55px
+      );
+
+    line-height: 1.015;
+
+    letter-spacing: -0.047em;
+  }
+
+  .hero-subtitle {
+    width: min(92%, 520px);
+
+    margin-top: 22px;
+
+    font-size: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+  .hero-section {
+    height:
+      calc(
+        100svh -
+        72px
+      );
+
+    min-height: 580px;
+  }
+
+  .hero-content-wrap {
+    padding:
+      42px
+      0
+      38px;
+  }
+
+  .hero-heading-group {
+    width: 100%;
+  }
+
+  .hero-kicker {
+    width: min(92%, 390px);
+
+    margin-bottom: 19px;
+
+    font-size: 8px;
+
+    line-height: 1.55;
 
     letter-spacing: 0.145em;
   }
 
   .hero-title {
+    max-width: 100%;
+
     font-size:
-      clamp(37px, 10vw, 57px);
+      clamp(
+        31px,
+        9.6vw,
+        46px
+      );
 
-    line-height: 0.95;
+    line-height: 1.025;
 
-    letter-spacing: -0.05em;
-  }
-
-  .hero-line {
-    white-space: normal;
+    letter-spacing: -0.043em;
   }
 
   .hero-subtitle {
-    max-width: 320px;
-
     margin-top: 21px;
 
-    font-size: 15px;
+    max-width: 340px;
+
+    font-size: 14px;
 
     line-height: 1.5;
   }
+
 }
 
+
 /* =========================================================
-   SMALL MOBILE
+   VERY SMALL MOBILE
 ========================================================= */
 
-@media (max-width: 480px) {
-
-  .hero-content-wrap {
-    padding:
-      100px
-      0
-      52px;
-  }
-
-  .hero-heading-group {
-    max-width:
-      calc(100vw - 28px);
-  }
-
-  .hero-kicker {
-    max-width: 290px;
-
-    font-size: 8px;
-  }
+@media (max-width: 390px) {
 
   .hero-title {
     font-size:
-      clamp(34px, 10.6vw, 49px);
-
-    line-height: 0.96;
+      clamp(
+        28px,
+        9.2vw,
+        38px
+      );
   }
 
-  .hero-subtitle {
-    max-width: 280px;
-
-    font-size: 14px;
+  .hero-kicker {
+    font-size: 7.5px;
   }
+
 }
 
+
 /* =========================================================
-   SHORT MOBILE / TABLET LANDSCAPE
+   SHORT MOBILE
 ========================================================= */
 
 @media
-  (max-width: 900px)
+  (max-width: 768px)
   and
-  (max-height: 560px)
-  and
-  (orientation: landscape) {
+  (max-height: 700px) {
 
   .hero-section {
-    min-height: 540px;
+    min-height: 520px;
   }
 
   .hero-content-wrap {
-    min-height: 540px;
-
     padding:
-      76px
+      28px
       0
-      30px;
-  }
-
-  .hero-heading-group {
-    max-width:
-      min(760px, 88vw);
+      25px;
   }
 
   .hero-kicker {
-    margin-bottom: 7px;
-
-    font-size: 8px;
+    margin-bottom: 14px;
   }
 
   .hero-title {
     font-size:
-      clamp(32px, 6.5vw, 48px);
+      clamp(
+        30px,
+        8vw,
+        42px
+      );
 
-    line-height: 0.93;
+    line-height: 1;
   }
 
   .hero-subtitle {
-    margin-top: 11px;
+    margin-top: 16px;
 
     font-size: 13px;
   }
+
 }
+
 
 /* =========================================================
    REDUCED MOTION
@@ -624,12 +826,15 @@
 @media (prefers-reduced-motion: reduce) {
 
   .hero-stage-media,
+  .hero-grid-glow,
   .hero-kicker,
   .hero-line,
-  .hero-subtitle,
-  .hero-vignette,
-  .hero-grid-glow {
-    transition: none !important;
+  .hero-subtitle {
     animation: none !important;
+
+    transition: none !important;
+
+    filter: none !important;
   }
+
 }

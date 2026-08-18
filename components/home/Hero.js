@@ -33,7 +33,6 @@ export default function Hero() {
           duration: 1.4,
         }
       )
-
         .fromTo(
           ".hero-vignette",
           {
@@ -45,7 +44,6 @@ export default function Hero() {
           },
           0
         )
-
         .fromTo(
           ".hero-grid-glow",
           {
@@ -59,7 +57,6 @@ export default function Hero() {
           },
           0.1
         )
-
         .fromTo(
           ".hero-kicker",
           {
@@ -75,7 +72,6 @@ export default function Hero() {
           },
           0.35
         )
-
         .fromTo(
           ".hero-line",
           {
@@ -88,15 +84,14 @@ export default function Hero() {
             opacity: 1,
             filter: "blur(0px)",
             duration: 1,
-            stagger: 0.12,
+            stagger: 0.11,
           },
           0.45
         )
-
         .fromTo(
           ".hero-subtitle",
           {
-            y: 22,
+            y: 20,
             opacity: 0,
             filter: "blur(6px)",
           },
@@ -106,7 +101,7 @@ export default function Hero() {
             filter: "blur(0px)",
             duration: 0.8,
           },
-          1
+          1.02
         );
     }, hero);
 
@@ -125,10 +120,11 @@ export default function Hero() {
       className="hero-section"
       ref={heroRef}
     >
+      {/* BACKGROUND */}
       <div className="hero-stage-media">
         <img
           src="/images/hero-rtsec.jpg"
-          alt="Infraestructura, conectividad y ciberseguridad empresarial"
+          alt="Infraestructura tecnológica y ciberseguridad RTSEC"
           className="hero-bg-image"
         />
 
@@ -136,13 +132,16 @@ export default function Hero() {
         <div className="hero-grid-glow" />
       </div>
 
+      {/* CONTENT */}
       <div className="container-main hero-content-wrap">
         <div className="hero-heading-group">
+
           <p className="hero-kicker">
             Arquitectura crítica · Ciberseguridad · Continuidad operativa
           </p>
 
           <h1 className="hero-title">
+
             <span className="hero-line-wrap">
               <span className="hero-line">
                 Lo importante no
@@ -157,20 +156,22 @@ export default function Hero() {
 
             <span className="hero-line-wrap">
               <span className="hero-line">
-                Es qué tan preparado estás
+                Es qué tan preparado
               </span>
             </span>
 
             <span className="hero-line-wrap">
               <span className="hero-line hero-line-accent">
-                cuando pase.
+                estás cuando pase.
               </span>
             </span>
+
           </h1>
 
           <p className="hero-subtitle">
             Redes que fluyen. Seguridad que resiste.
           </p>
+
         </div>
       </div>
     </section>
