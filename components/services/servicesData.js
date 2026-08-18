@@ -25,7 +25,7 @@ export const servicesData = [
     title: "Implementación e Integración",
 
     shortDescription:
-      "Ejecutamos despliegues controlados, seguros y alineados a la operación del cliente, integrando correctamente las capacidades tecnológicas necesarias.",
+      "Ejecutamos despliegues controlados, seguros y alineados a la operación del cliente.",
 
     intro:
       "Ejecutamos despliegues controlados, seguros y alineados a la operación del cliente, integrando correctamente las capacidades tecnológicas necesarias.",

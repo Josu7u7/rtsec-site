@@ -64,7 +64,6 @@ export default function ServicesStackSection() {
 
       <section className="services-page-hero">
         <div className="container-main">
-
           <p className="services-page-kicker">
             Servicios especializados
           </p>
@@ -74,10 +73,9 @@ export default function ServicesStackSection() {
           </h1>
 
           <p className="services-page-text">
-            Acompañamos cada proyecto desde la definición técnica hasta su
-            implementación y operación.
+            Diseñamos, implementamos y sostenemos capacidades tecnológicas
+            con enfoque en riesgo, continuidad y operación real.
           </p>
-
         </div>
       </section>
 
@@ -87,9 +85,7 @@ export default function ServicesStackSection() {
 
       <section className="services-page-index">
         <div className="container-main">
-
           <div className="services-page-index-grid">
-
             {services.map((service) => (
               <a
                 key={service.id}
@@ -99,9 +95,7 @@ export default function ServicesStackSection() {
                 {service.title}
               </a>
             ))}
-
           </div>
-
         </div>
       </section>
 
@@ -113,7 +107,6 @@ export default function ServicesStackSection() {
         <div className="container-main">
 
           {services.map((service, index) => (
-
             <article
               key={service.id}
               id={service.id}
@@ -122,10 +115,9 @@ export default function ServicesStackSection() {
               }`}
             >
 
-              {/* CONTENT */}
+              {/* COPY */}
 
               <div className="services-detail-block-copy">
-
                 <p className="services-detail-block-eyebrow">
                   {service.eyebrow}
                 </p>
@@ -139,23 +131,18 @@ export default function ServicesStackSection() {
                 </p>
 
                 <ul className="services-detail-block-list">
-
                   {service.items.map((item) => (
                     <li key={item}>
                       {item}
                     </li>
                   ))}
-
                 </ul>
-
               </div>
 
               {/* IMAGE */}
 
               <div className="services-detail-block-media">
-
                 <div className="services-detail-block-image-shell">
-
                   <Image
                     src={service.image}
                     alt={service.title}
@@ -163,13 +150,10 @@ export default function ServicesStackSection() {
                     height={1000}
                     className="services-detail-block-image"
                   />
-
                 </div>
-
               </div>
 
             </article>
-
           ))}
 
         </div>

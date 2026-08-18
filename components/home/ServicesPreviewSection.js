@@ -35,15 +35,6 @@ const services = [
     image: "/images/Soporte y Mantenimiento.jpg",
     href: "/servicios#soporte-mantenimiento-especializado",
   },
-  {
-    id: "servicios-gestionados",
-    eyebrow: "Servicio 04",
-    title: "Servicios Gestionados",
-    description:
-      "Operamos capacidades específicas de monitoreo, detección, respuesta o infraestructura para reducir carga interna y mejorar la ejecución continua.",
-    image: "/images/Servicios Gestionados (SOC:NOC).jpg",
-    href: "/servicios#servicios-gestionados",
-  },
 ];
 
 export default function ServicesPreviewSection() {
@@ -65,10 +56,23 @@ export default function ServicesPreviewSection() {
 
         if (!copy || !media || !mediaInner || !image) return;
 
-        gsap.set(copy, { y: 32, opacity: 0 });
-        gsap.set(media, { y: 36, opacity: 0 });
-        gsap.set(mediaInner, { clipPath: "inset(0 100% 0 0 round 28px)" });
-        gsap.set(image, { scale: 1.08 });
+        gsap.set(copy, {
+          y: 32,
+          opacity: 0,
+        });
+
+        gsap.set(media, {
+          y: 36,
+          opacity: 0,
+        });
+
+        gsap.set(mediaInner, {
+          clipPath: "inset(0 100% 0 0 round 28px)",
+        });
+
+        gsap.set(image, {
+          scale: 1.08,
+        });
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -119,10 +123,22 @@ export default function ServicesPreviewSection() {
           trigger: row,
           start: "top 70%",
           end: "bottom 30%",
-          onEnter: () => row.classList.add("is-active"),
-          onEnterBack: () => row.classList.add("is-active"),
-          onLeave: () => row.classList.remove("is-active"),
-          onLeaveBack: () => row.classList.remove("is-active"),
+
+          onEnter: () => {
+            row.classList.add("is-active");
+          },
+
+          onEnterBack: () => {
+            row.classList.add("is-active");
+          },
+
+          onLeave: () => {
+            row.classList.remove("is-active");
+          },
+
+          onLeaveBack: () => {
+            row.classList.remove("is-active");
+          },
         });
       });
 
@@ -135,12 +151,16 @@ export default function ServicesPreviewSection() {
       try {
         ctxRef.current?.revert();
       } catch {}
+
       ctxRef.current = null;
     };
   }, []);
 
   return (
-    <section ref={sectionRef} className="services-preview-section">
+    <section
+      ref={sectionRef}
+      className="services-preview-section"
+    >
       <div className="container-main">
         <div className="services-preview-list">
           {services.map((service) => (
@@ -151,11 +171,18 @@ export default function ServicesPreviewSection() {
             >
               <div className="services-preview-copy">
                 <div className="services-preview-copy-top">
-                  <p className="services-preview-eyebrow">{service.eyebrow}</p>
-                  <h2 className="services-preview-title">{service.title}</h2>
+                  <p className="services-preview-eyebrow">
+                    {service.eyebrow}
+                  </p>
+
+                  <h2 className="services-preview-title">
+                    {service.title}
+                  </h2>
                 </div>
 
-                <p className="services-preview-text">{service.description}</p>
+                <p className="services-preview-text">
+                  {service.description}
+                </p>
               </div>
 
               <div className="services-preview-image-col">

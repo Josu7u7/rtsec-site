@@ -51,12 +51,17 @@ export default function Header() {
       <header className="site-header">
         <div className="container-main">
           <div className="header-inner">
-            <a href="/" className="brand-mark" aria-label="RTSEC Perú" onClick={closeMenu}>
+            <a
+              href="/"
+              className="brand-mark"
+              aria-label="RTSEC Perú"
+              onClick={closeMenu}
+            >
               <Image
                 src="/images/rtsec-logo.svg"
                 alt="RTSEC Perú"
-                width={500}
-                height={500}
+                width={260}
+                height={74}
                 className="brand-logo"
                 priority
               />
@@ -82,10 +87,16 @@ export default function Header() {
             </nav>
 
             <div className="header-actions">
-              <a href="/contacto" className="contact-cta desktop-contact-cta" aria-label="Contáctanos">
+              <a
+                href="/contacto"
+                className="contact-cta desktop-contact-cta"
+                aria-label="Contáctanos"
+              >
                 <span className="contact-cta-outline" />
+
                 <span className="contact-cta-inner">
                   <span className="contact-cta-icon">→</span>
+
                   <span className="contact-cta-text">
                     <span style={{ "--i": 0 }}>C</span>
                     <span style={{ "--i": 1 }}>o</span>
@@ -104,7 +115,9 @@ export default function Header() {
 
               <button
                 type="button"
-                className={`mobile-menu-toggle ${menuOpen ? "is-open" : ""}`}
+                className={`mobile-menu-toggle ${
+                  menuOpen ? "is-open" : ""
+                }`}
                 aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
                 aria-expanded={menuOpen}
                 aria-controls="mobile-navigation"
@@ -120,22 +133,31 @@ export default function Header() {
       </header>
 
       <div
-        className={`mobile-nav-overlay ${menuOpen ? "is-open" : ""}`}
+        className={`mobile-nav-overlay ${
+          menuOpen ? "is-open" : ""
+        }`}
         onClick={closeMenu}
         aria-hidden={!menuOpen}
       >
         <aside
           id="mobile-navigation"
-          className={`mobile-nav-panel ${menuOpen ? "is-open" : ""}`}
+          className={`mobile-nav-panel ${
+            menuOpen ? "is-open" : ""
+          }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="mobile-nav-top">
-            <a href="/" className="mobile-nav-brand" aria-label="RTSEC Perú" onClick={closeMenu}>
+            <a
+              href="/"
+              className="mobile-nav-brand"
+              aria-label="RTSEC Perú"
+              onClick={closeMenu}
+            >
               <Image
                 src="/images/rtsec-logo.svg"
                 alt="RTSEC Perú"
-                width={500}
-                height={500}
+                width={260}
+                height={74}
                 className="mobile-nav-logo"
               />
             </a>
@@ -151,7 +173,10 @@ export default function Header() {
             </button>
           </div>
 
-          <nav className="mobile-nav-links" aria-label="Menú móvil">
+          <nav
+            className="mobile-nav-links"
+            aria-label="Menú móvil"
+          >
             {navItems.map((item) => {
               const isActive =
                 item.href === "/"
@@ -162,7 +187,9 @@ export default function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`mobile-nav-link ${isActive ? "is-active" : ""}`}
+                  className={`mobile-nav-link ${
+                    isActive ? "is-active" : ""
+                  }`}
                   onClick={closeMenu}
                 >
                   <span>{item.label}</span>
@@ -172,7 +199,11 @@ export default function Header() {
           </nav>
 
           <div className="mobile-nav-bottom">
-            <a href="/contacto" className="mobile-nav-cta" onClick={closeMenu}>
+            <a
+              href="/contacto"
+              className="mobile-nav-cta"
+              onClick={closeMenu}
+            >
               Contáctanos
             </a>
           </div>
